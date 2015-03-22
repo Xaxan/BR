@@ -1,0 +1,13 @@
+#marquee-scroller {
+  
+  color: white;
+}
+
+#marquee-scroller-inner {
+  padding: 5px;
+}
+
+.marquee-block span{
+	font-size: 13px;
+  font-weight: bold;
+}

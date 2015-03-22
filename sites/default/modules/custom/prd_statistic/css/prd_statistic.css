@@ -1,0 +1,44 @@
+tr.expandable{
+	width: 63px;
+	font-weight: bold;
+	color: white;
+	font-family: monospace;
+	font-size: 12px;
+	text-align: center!important;
+	cursor: pointer;
+	background: -webkit-linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
+	background: -o-linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
+	background: -moz-linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
+	background: linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
+}
+
+tr.total{
+	width: 63px;
+	font-weight: bold;
+	color: white;
+	font-family: monospace;
+	font-size: 12px;
+	cursor: pointer;
+	text-align: center!important;
+	background: rgb(119, 3, 3);
+}
+tr.colspan-header th{
+	color: white!important;
+	white-space: nowrap!important;
+	text-align: center!important;
+	font-size: 12px;
+	background: #0A3F63!important;
+	background-image: -webkit-linear-gradient(top, #0A3F63, #000000)!important;
+	background-image: -moz-linear-gradient(top, #0A3F63, #000000)!important;
+	background-image: -ms-linear-gradient(top, ##0A3F63, #000000)!important;
+	background-image: -o-linear-gradient(top, ##0A3F63, #000000)!important;
+	background-image: linear-gradient(to bottom, #0A3F63, #000000)!important;
+}
+
+tr.header th{
+	text-align: center!important;
+}
+
+table #vip-stat{
+ width: 100%!important;	
+}

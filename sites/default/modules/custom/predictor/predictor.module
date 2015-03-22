@@ -1,0 +1,300 @@
+<?php
+ module_load_include('inc', 'predictor', 'includes/corners.util');
+ module_load_include('inc', 'predictor', 'includes/league.util');
+ module_load_include('inc', 'predictor', 'includes/predictor.util');
+
+/**
+ * Implements hook_menu().
+ */
+function predictor_menu(){
+	$items = array();
+	
+	$items['admin/predictor'] = array(
+    'title' => 'Predictor',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('predictor_form'),
+    'access arguments' => array('access administration pages'),
+    'weight' => -100,
+  );
+  
+  $items['predictor'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('league_form'),
+    'access arguments' => array('access content'),
+    'weight' => -100,
+  );
+  
+  $items['cards-corners-picks'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('corners_form'),
+    'access arguments' => array('access content'),
+    'weight' => -100,
+  );
+  
+
+  return $items;
+}
+
+
+function league_form($form, &$form_state) {
+	
+	$form = array();
+	
+	$form['filter'] = array(
+   '#type' => 'fieldset',
+   '#collapsible' => FALSE,
+   '#collapsed' => FALSE,
+   '#attributes' => array('class' => array('container-inline'),'style'=>array('width: 500px;border: none;')),
+);
+
+	 $form['filter']['date'] = array(
+  	'#type' => 'select',
+		'#options' => get_date(),
+		'#default_value' => variable_get('league_date'),
+	);
+
+
+  $form['filter']['country'] = array(
+   '#type' => 'select',
+   '#options' => get_country(),
+   '#default_value' => variable_get('league_country'),
+ );
+
+	
+  $form['filter']['submit'] = array(
+   '#type' => 'submit',
+   '#value' => t('Search'),
+ );
+ 
+/*
+  $form['filter']['q_sign'] = array(
+  '#markup' => '<div class=tooltip>
+  	<img src="sites/default/modules/custom/predictor/img/question_mark.gif" alt="question_mark" width="" height="" />
+  	<span>
+  	O/U = Goals Out/Under<br>
+  	HTG = Home Team Goals<br>
+  	ATG = Away Team Goals
+  	</span>
+  </div>',
+);	
+*/
+	
+	$league_table = theme('table', array(
+		'header' => get_header(),
+		'rows' => get_table_data(),
+		'attributes' => array('class' => array('soccer_table')),
+		'#empty' =>t('No Soccer Table Data'),
+		'multiple' =>'multiple',
+ ));
+	
+ $form['league_table'] = array(
+  '#markup' => $league_table,
+);
+	
+
+	
+	$form['#attached']['css'] = array(
+  	drupal_get_path('module', 'predictor') . '/css/predictor.css',
+);	
+	
+	return $form;
+}
+
+function league_form_submit($form, &$form_state) {
+  $date    = $form_state['values']['date'];
+  $country = $form_state['values']['country'];
+  
+    variable_set('league_date', $date);
+    variable_set('league_country', $country);
+  //print_r($form_state['values']['country']);
+  drupal_goto('predictor', array('query' => array('date' => $date,'country' => $country)));
+  $form_state['rebuild'] = TRUE;
+  
+}
+
+
+function corners_form($form, &$form_state) {
+	
+	$form = array();
+	
+	
+	$block = module_invoke('prd_statistic', 'block_view', 'yc_stat');
+	$block = render($block['content']);
+	
+	 $form['prd'] = array(
+  '#markup' => $block,
+ );
+	
+	
+	
+	$form['filter'] = array(
+   '#type' => 'fieldset',
+   '#collapsible' => FALSE,
+   '#collapsed' => FALSE,
+   '#attributes' => array('class' => array('container-inline'),'style'=>array('width: 500px;border: none;')),
+);
+
+	 $form['filter']['date'] = array(
+  	'#type' => 'select',
+		'#options' => get_corners_date(),
+		'#default_value' => variable_get('corner_date'),
+	);
+
+
+  $form['filter']['country'] = array(
+   '#type' => 'select',
+   '#options' => get_corners_country(),
+   '#default_value' => variable_get('corner_country'),
+ );
+
+	
+  $form['filter']['submit'] = array(
+   '#type' => 'submit',
+   '#value' => t('Search'),
+ );
+	
+	
+	
+	  $yellow_cards_table = theme('table', array(
+		'header' => get_yc_header(),
+		'rows' => get_yc_table_data(),
+		'#attributes' => array('class' => array('yellow_cards'),'style' => array('margin-top: -18px;')),
+		'#empty' =>t('No Yellow Cards Block'),
+		'multiple' =>'multiple',
+ ));
+	
+ $form['league_table'] = array(
+  '#markup' => $yellow_cards_table,
+ );
+	
+	return $form;
+}
+
+
+function corners_form_submit($form, &$form_state) {
+  $date    = $form_state['values']['date'];
+  $country = $form_state['values']['country'];
+  
+  variable_set('corner_date', $date);
+  variable_set('corner_country', $country);
+  drupal_goto('cards-corners-picks', array('query' => array('date' => $date,'country' => $country)));
+  $form_state['rebuild'] = TRUE;
+  
+}
+
+
+function predictor_form($form, &$form_state) {
+   $forom = array();
+	 $active = array(0 => t('Publish League'),1 => t('Publish YC'), 2 => t('Archive League'), 3 => t('Archive YC'));
+
+	$form['notes'] = array( 
+   '#type' => 'markup', 
+   '#markup' => '<div class="import-notes">A few notes when uploading. <ul>
+    <li>Make sure the file is in a .csv format.</ li>
+    <li>Columns should be in *this* order</li>
+    <li>Be sure to click the "Upload" button when you select a csv.</li>
+    </ul></div>', 
+   '#upload_location' => 'public://tmp/', 
+ ); 
+ 
+ $form['import'] = array(
+   '#title' => t('Import'), 
+   '#type' => 'managed_file', 
+   '#description' => t('The uploaded csv will be imported and temporarily saved.'), 
+   '#upload_location' => 'public://', 
+   '#upload_validators' => array(
+   'file_validate_extensions' => array('csv'), 
+   ), 
+ ); 
+ 
+ $form['archive'] = array(
+    '#type' => 'radios',
+    '#title' => t('Save AS Archive'),
+    '#default_value' => 0,
+    '#options' => $active,
+    '#description' => t('Check Archive when u want to save data in archive!!'),
+  );
+
+ $form['submit'] = array(
+   '#type' => 'submit', 
+   '#value' => t('Save'),
+  ); 
+  
+  	
+	return $form;
+}
+
+
+function predictor_form_submit($form, &$form_state) {
+	$archive = $form_state['values']['archive'];
+
+	switch ($archive) {
+	    case 0:
+	        save_uploaded_file('league',$form_state);
+	        break;
+	    case 1:
+	        save_uploaded_file('corners',$form_state);
+	        break;
+	    case 2:
+	        insert_leagule_archive();
+	        break;
+	   case 3:
+	        insert_yc_archive();
+	        break;
+	}
+}
+
+
+
+function predictor_block_info() {  
+  
+  $blocks['soccer_table'] = array(
+    // info: The name of the block.
+    'info' => t('Soccer Scores Table'),
+  );
+  
+  $blocks['yellow_cards_block'] = array(
+    // info: The name of the block.
+    'info' => t('Yellow Cards Table'),
+  );
+  
+  return $blocks;
+}
+
+
+function predictor_block_view($delta = '') {
+  // The $delta parameter tells us which block is being requested.
+   $soccer_table = theme('table', array(
+		'header' => get_header(),
+		'rows' => get_table_data(),
+		'attributes' => array('class' => array('soccer_table')),
+		'#empty' =>t('No Soccer Table Data'),
+		'multiple' =>'multiple',
+ ));
+ 
+  $yellow_cards_block = theme('table', array(
+		'header' => get_yc_header(),
+		'rows' => get_yc_table_data(),
+		'attributes' => array('class' => array('yellow_cards_block')),
+		'#empty' =>t('No Yellow Cards Block'),
+		'multiple' =>'multiple',
+ ));
+  
+  
+  $block = array();
+  switch ($delta) {
+    case 'soccer_score':
+      // Create your block content here
+      $block['subject'] = t('Soccer Predictions');
+      $block['content'] = $soccer_table;
+      break;
+   case 'yellow_cards_block':
+      // Create your block content here
+      $block['subject'] = t('Soccer Predictions');
+      $block['content'] = $yellow_cards_block;
+      break;
+ }
+   
+  return $block;
+}
+

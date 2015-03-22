@@ -1,0 +1,6 @@
+name = Soccer Predictor archive
+description = Save Predictor Soccer Scores
+
+core = 7.x
+version = "7.x"
+package = KSG

@@ -1,0 +1,126 @@
+<?php
+module_load_include('inc', 'predictor_archive', 'includes/predictor_archive.util');
+
+
+function predictor_archive_menu() {
+	$items = array();
+  
+  $items['predictor_archive'] = array(
+    'title callback' => 'predictor_title_form',
+    'title arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('predictor_archive_form'),
+    'access arguments' => array('access content'),
+    'weight' => -100,
+  );
+  
+return $items;
+}
+
+/**
+ * Title callback.
+ */
+function predictor_title_form($title) {
+	switch ($title) {
+		case 'league_vip':
+			return $title = 'VIP 1X2 Picks Archvie';
+		break;
+	  case 'league_free':	
+			return $title = 'Free 1X2 Picks Archive';
+	  break;
+	  case 'yc_vip':
+			return $title = 'VIP Cards & Corners Picks Archive';
+		break;
+		case 'yc_free':	
+			return $title = 'Free Cards & Corners Picks Archive';
+	  break;
+	}
+}
+
+
+function predictor_archive_form($form, &$form_state){
+
+ $arg = 'free';
+ if(!empty($form_state['build_info']['args'])){
+     $arg = $form_state['build_info']['args'][0];
+  }
+
+	$form = array();
+	$path = drupal_get_path('module', 'predictor_archive');
+	
+	  if (isset($form_state['input']['op'])) {
+		 if ($form_state['input']['op'] == 'Search') {
+				 $from = $form_state['input']['from'];
+				 $to   = $form_state['input']['to'];	
+		}
+	}
+		elseif(isset($_GET['from']) && $_GET['to']) {
+			$from  = $_GET['from'];
+			$to    = $_GET['to'];
+	}
+	else{
+		 $stamp = mktime(-744);
+		 $from  = date('n/d/y', $stamp);
+		 $to    = date('n/d/y');
+	}
+
+	 $form['cal']['from'] = array(
+    '#title' 				 => 'From:', 
+  	'#type' 				 => 'textfield', 
+  	'#default_value' => $from,
+  	'#size'          => 20,  
+  	'#attributes'    => array('id' => array('datepicker-from'))
+  );		
+  
+  $form['cal']['to'] = array(
+  	'#title' 				 => 'To:', 
+  	'#type' 				 => 'textfield', 
+  	'#default_value' => $to,
+  	'#size'          => 20,  
+  	'#attributes'    => array('id' => array('datepicker'))
+  );		
+
+  $form['cal']['submit'] = array(
+  	'#type' 			=> 'submit', 
+  	'#value' 			=> t('Search'),
+  	'#attributes' => array('style' => array('float: left;margin-top: 32px;'))
+  );
+  
+	$form['cal']['#prefix'] = '<div class="cal clearfix" style="">';
+	$form['cal']['#suffix'] = '</div>';
+	
+	$form['data_archive'] = array(
+	   '#markup' => archive($from, $to, $arg),
+	 );
+	  
+	$form['data_archive']['#prefix'] = '<div style="">';
+	$form['data_archive']['#suffix'] = '</div>';  
+	  
+	$form['#attached']['js'] = array(
+ 	 	$path . '/js/jquery-ui.min.js',
+ 	 	$path . '/js/datepick.js',
+  );
+  
+  $form['#attached']['css'] = array(
+ 	 	$path . '/css/jquery-ui.min.css',
+  );
+  
+ return $form;
+}
+
+
+function archive($from, $to, $arg){
+	  $soccer_table = theme('table', array(
+		'header' => get_archive_header($arg),
+		'rows' => get_table_datas($from, $to, $arg),
+		'attributes' => array('class' => array('invited_users')),
+		'#empty' =>t('No invited users yet'),
+		'multiple' =>'single',
+ ));
+ return $soccer_table;	
+}
+
+function predictor_archive_form_submit($form, &$form_state){
+	 $form_state['rebuild'] = TRUE;
+}

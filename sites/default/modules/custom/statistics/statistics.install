@@ -1,0 +1,233 @@
+<?php 
+
+function statistics_uninstall() {
+  drupal_uninstall_schema('statistics');
+}
+
+function statistics_schema() {
+  $schema['statistics'] = array(
+    'description' => 'The base table for nodes.',
+    'fields' => array(
+      'country' => array(
+        'description' => 'country name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ), 
+      'league' => array(
+        'description' => 'league name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ), 
+      'round' => array(
+        'description' => 'round.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ), 
+      'date' => array(
+        'description' => 'The Unix timestamp.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'home_team' => array(
+        'description' => 'home_team.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'away_team' => array(
+        'description' => 'away_team.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+			'ht_goals' => array(
+        'description' => 'ht_goals.',
+        'type' => 'varchar',
+        'length' => 255,
+				'default' => NULL,
+      ), 
+     'at_goals' => array(
+        'description' => 'at_goals.',
+        'type' => 'varchar',
+        'length' => 255,
+				'default' => NULL,
+      ),  
+		 'w1' => array(
+        'description' => 'w1.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+     'draw' => array(
+        'description' => 'draw.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+     'w2' => array(
+        'description' => 'w2.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'bh_possession' => array(
+        'description' => 'Ball Home Possession.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+     'ba_possession' => array(
+        'description' => 'Ball away Possession.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+     'gh_attempts' => array(
+        'description' => 'Goal Attempts Home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'ga_attempts' => array(
+        'description' => 'Goal Attempts away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'gh_shots' => array(
+        'description' => 'Goal shots Home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'ga_shots' => array(
+        'description' => 'Goal shots away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'gh_shots_off' => array(
+        'description' => 'Goal off shots Home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'ga_shots_off' => array(
+        'description' => 'Goal off shots away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'hb_shots' => array(
+        'description' => 'block shots Home.',
+         'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'ab_shots' => array(
+        'description' => 'block shots away.',
+         'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+      'hc_kicks' => array(
+        'description' => 'Corner Kicks Home.',
+         'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'ac_kicks' => array(
+        'description' => 'Corner Kicks away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ), 
+     'h_offsides' => array(
+        'description' => 'Offsides.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'a_offsides' => array(
+        'description' => 'Offsides.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'h_throw_in' => array(
+        'description' => 'Throw-in home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'a_throw_in' => array(
+        'description' => 'Throw-in away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'hgk_saves' => array(
+        'description' => 'Goalkeeper Saves home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'agk_saves' => array(
+        'description' => 'Goalkeeper Saves away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ), 
+     'h_fouls' => array(
+        'description' => 'Fouls home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'a_fouls' => array(
+        'description' => 'Fouls away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+      'h_yc' => array(
+        'description' => 'Yellow Cards home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'a_yc' => array(
+        'description' => 'Yellow Cards away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'h_rc' => array(
+        'description' => 'Red Cards home.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),
+     'a_rc' => array(
+        'description' => 'Red Cards away.',
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => NULL,
+      ),       
+		),
+  );
+  return $schema;
+}  

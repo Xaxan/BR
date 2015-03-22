@@ -1,0 +1,6 @@
+name = Soccer predictions Statistics	
+description = Soccer predictions Statistics
+
+core = 7.x
+version = "7.x"
+package = KSG

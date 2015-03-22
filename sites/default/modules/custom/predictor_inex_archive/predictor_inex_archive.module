@@ -1,0 +1,304 @@
+<?php
+
+function predictor_inex_archive_menu() {
+	$items = array();
+  
+  $items['admin/add-to-archive'] = array(
+    'title' => 'Create insider/exclusive archive',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('predictor_inex_archive_add_more_form'),
+    'access arguments' => array('access administration pages'),
+    'weight' => -200,
+   );
+   
+  return $items;
+  
+}
+
+function predictor_inex_archive_add_more_form($form, &$form_state, $no_js_use = FALSE) {
+
+
+  // Because we have many fields with the same values, we have to set
+  // #tree to be able to access them.
+  $form['#tree'] = TRUE;
+  $form['names_fieldset'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Add Picks',
+    '#attributes' => array('class' => array('container-inline')), 
+    // Set up the wrapper so that AJAX will be able to replace the fieldset.
+    '#prefix' => '<div id="names-fieldset-wrapper" style="width:1315px;font-size: 10px;">',
+    '#suffix' => '</div>',
+  );
+
+  $form["wrapper"] = array("#markup" => "<div class='inline-messages'></div>");
+
+  // Build the fieldset with the proper number of names. We'll use
+  // $form_state['num_names'] to determine the number of textfields to build.
+  if (empty($form_state['num_names'])) {
+    $form_state['num_names'] = 1;
+  }
+  for ($i = 0; $i < $form_state['num_names']; $i++) {
+  
+  
+    $form['names_fieldset'][$i]['date'] = array(
+      '#type' => 'textarea',
+      '#title' => $i.') '.'Date:',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#attributes' => array('style' => array('margin-right:12px;width: 72px;display: inline-block;height: 47px;')),
+      '#prefix' => '<div id="tr-'.$i.'" style="'.color($i).'" style="display:block;">',
+    );
+  
+  $form['names_fieldset'][$i]['league_name'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'League Name:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 72px;display: inline-block;height: 47px;')),
+      '#size' =>10,
+    ); 
+
+  $form['names_fieldset'][$i]['home_team'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Home Team:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 72px;display: inline-block;height: 47px;')),
+      '#size' =>10,
+    ); 
+    
+      $form['names_fieldset'][$i]['away_team'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Away Team:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 72px;display: inline-block;height: 47px;')),
+      '#size' =>10,
+    ); 
+    $form['names_fieldset'][$i]['pick'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Pick:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 72px;display: inline-block;height: 47px;')),
+      '#size' =>5,
+    );   
+ 
+   $form['names_fieldset'][$i]['odd'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Odds:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 39px;display: inline-block;height: 47px;')),
+      '#size' =>5,
+    ); 
+    
+       $form['names_fieldset'][$i]['stake'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Stake:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 39px;display: inline-block;height: 47px;')),
+      '#size' =>5,
+    ); 
+
+  $form['names_fieldset'][$i]['bookmaker'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Bookmaker:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 72px;display: inline-block;height: 47px;')),
+      '#size' =>10,
+    );  
+   $form['names_fieldset'][$i]['result'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Result:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 39px;display: inline-block;height: 47px;')),
+      '#size' =>5,
+    );   
+    $form['names_fieldset'][$i]['profit'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Profit:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 39px;display: inline-block;height: 47px;')),
+      '#size' =>5,
+    );   
+  
+/*
+    $form['names_fieldset'][$i]['status'] = array(
+      '#type' => 'textarea',
+      '#cols' => 1, 
+			'#rows' => 1,
+      '#title' => 'Status:',
+      '#attributes' => array('style' => array('margin-right:4px;width: 72px;display: inline-block;height: 47px;')),
+      '#size' =>10,
+    ); 
+*/
+      
+  $form['names_fieldset'][$i]['type'] = array(
+    '#title' => 'Type:',
+    '#type' => 'select',
+    '#options' => array(
+			'NaN' => 'Select',
+			'ins' => 'Insider',
+      'ex'  => 'Exclusive',
+    ),  
+    '#attributes' => array('style' => array('margin-right:12px;width: 72px;display: inline-block;')),
+   );
+  }
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Save',
+    '#ajax' => array(
+     'callback' => 'predictor_inex_archive_add_more_form_callback', 
+      'wrapper' => 'predictor-inex-archive-add-more-form', 
+      'effect' => 'fade'
+    )
+  );  
+
+/*
+  $form['search_desc'] = array(
+  '#type'=> 'item',
+  '#title'=> 'Информация клиентов',
+  '#prefix' => '<div style="border:solid silver 1px; padding:12px;background-color: rgb(250, 255, 249);">',
+  '#suffix' => '</div>',
+	'#markup' => users_data(),
+	);
+*/
+  
+  $form['names_fieldset']['add_name'] = array(
+    '#type' => 'submit',
+    '#value' => 'ADD More Pick',
+    '#submit' => array('ajax_example_add_more_add_one'),
+    '#attributes' => array('style'=>'margin-top: 12px;'),
+    '#ajax' => array(
+      'callback' => 'ajax_example_add_more_callback',
+      'wrapper' => 'names-fieldset-wrapper',
+    ),
+  );
+  
+  if ($form_state['num_names'] > 1) {
+    $form['names_fieldset']['remove_name'] = array(
+      '#type' => 'submit',
+      '#value' => t('Remove Last Row'),
+      '#submit' => array('ajax_example_add_more_remove_one'),
+      '#ajax' => array(
+        'callback' => 'ajax_example_add_more_callback',
+        'wrapper' => 'names-fieldset-wrapper',
+      ),
+    );
+  }
+
+
+  // This simply allows us to demonstrate no-javascript use without
+  // actually turning off javascript in the browser. Removing the #ajax
+  // element turns off AJAX behaviors on that element and as a result
+  // ajax.js doesn't get loaded.
+  // For demonstration only! You don't need this.
+  if ($no_js_use) {
+    // Remove the #ajax from the above, so ajax.js won't be loaded.
+    if (!empty($form['names_fieldset']['remove_name']['#ajax'])) {
+      unset($form['names_fieldset']['remove_name']['#ajax']);
+    }
+    unset($form['names_fieldset']['add_name']['#ajax']);
+  }
+
+
+
+  return $form;
+}
+
+function predictor_inex_archive_add_more_form_callback($form, &$form_state) {
+    $messages = theme('status_messages');
+
+  if($messages){
+    $form["wrapper"] = array("#markup" => "<div class='inline-messages'>".$messages."</div>");
+  }
+  return $form;
+}
+
+/*
+function predictor_inex_archive_add_more_form_validate($form, &$form_state) {
+	foreach($form_state['values']['names_fieldset'] as $kay=>$value){
+		if ($form_state['values']['names_fieldset'][$kay]['name'] == '' || $form_state['values']['names_fieldset'][$kay]['room_id'] == '') {
+		   form_set_error('', t($kay.' st Name field is empty!'));
+		  }
+				db_set_active('prd');  
+				$client = get_clientby_tr_code($form_state['values']['names_fieldset'][$kay]['name']);
+				db_set_active('default');	
+		
+		if($client->uid){
+			form_set_error('', t($form_state['values']['names_fieldset'][$kay]['name'].' already in system'));
+		}  
+	 }
+}
+*/
+
+function predictor_inex_archive_add_more_form_submit($form, &$form_state) {
+
+	foreach($form_state['values']['names_fieldset'] as $kay=>$value){
+		$date        = $form_state['values']['names_fieldset'][$kay]['date'];
+		$league_name = $form_state['values']['names_fieldset'][$kay]['league_name'];
+		$home_team   = $form_state['values']['names_fieldset'][$kay]['home_team'];
+		$away_team   = $form_state['values']['names_fieldset'][$kay]['away_team'];
+		$pick        = $form_state['values']['names_fieldset'][$kay]['pick'];
+		$odds        = $form_state['values']['names_fieldset'][$kay]['odd'];
+		$stake       = $form_state['values']['names_fieldset'][$kay]['stake'];
+		$bookmaker   = $form_state['values']['names_fieldset'][$kay]['bookmaker'];
+		$result      = $form_state['values']['names_fieldset'][$kay]['result'];
+		$profit      = $form_state['values']['names_fieldset'][$kay]['profit'];
+		$status      = $form_state['values']['names_fieldset'][$kay]['status'];
+		$type        = $form_state['values']['names_fieldset'][$kay]['type'];
+		
+	if($date != "A" && $date != "R")
+		$nid = db_insert('predictor_archive_inex') // Table name no longer needs {}
+			->fields(array(
+				  'date' => $date,
+				  'league_name' => $league_name,
+				  'home_team'   => $home_team,
+				  'away_team'   => $away_team,
+				  'pick'        => $pick,
+				  'odd'         => $odds,
+				  'stake'       => $stake,
+				  'bookmaker'   => $bookmaker,
+				  'result'      => $result,
+				  'profit'      => $profit,
+				  'status'      => $status,
+				  'type'        => $type,
+			))
+->execute();
+		
+ }
+	$form_state['rebuild'] = TRUE;
+	drupal_set_message(t('New Picks has been saved.'));
+}
+
+
+function ajax_example_add_more_callback($form, &$form_state) {
+  return $form['names_fieldset'];
+}
+
+function ajax_example_add_more_add_one($form, &$form_state) {
+  $form_state['num_names']++;
+  $form_state['rebuild'] = TRUE;
+}
+
+function ajax_example_add_more_remove_one($form, &$form_state) {
+  if ($form_state['num_names'] > 1) {
+    $form_state['num_names']--;
+  }
+  $form_state['rebuild'] = TRUE;
+}
+
+function color($i){
+ if ($i % 2 == 0) {
+  return "even";
+ }else{
+	return "odd";
+}
+	
+}

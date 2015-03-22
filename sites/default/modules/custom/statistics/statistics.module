@@ -1,0 +1,414 @@
+<?php
+ module_load_include('inc', 'statistics', 'includes/statistics.util');
+ module_load_include('inc', 'statistics', 'includes/stat_table.util');
+
+/**
+ * Implements hook_menu().
+ */
+function statistics_menu(){
+	$items = array();
+
+	$items['admin/statistics'] = array(
+    'title' => 'Statistics',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('statistics_admin_form'),
+    'access arguments' => array('access administration pages'),
+    'weight' => -100,
+  );
+  
+  $items['teams-comparison'] = array(
+    'title' => 'Teams H2H Comparison',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('statistics_form'),
+    'access callback' => TRUE,
+    'weight' => -100,
+  );
+	
+	return $items;
+}
+
+function statistics_admin_form($form, &$form_state) {
+  $forom = array();
+
+	$form['notes'] = array( 
+   '#type' => 'markup', 
+   '#markup' => '<div class="import-notes">A few notes when uploading. <ul>
+    <li>Make sure the file is in a .csv format.</ li>
+    <li>Columns should be in *this* order</li>
+    <li>Be sure to click the "Upload" button when you select a csv.</li>
+    </ul></div>', 
+   '#upload_location' => 'public://tmp/', 
+ ); 
+ 
+ $form['import'] = array(
+   '#title' => t('Import'), 
+   '#type' => 'managed_file', 
+   '#description' => t('The uploaded csv will be imported and temporarily saved.'), 
+   '#upload_location' => 'public://', 
+   '#upload_validators' => array(
+   'file_validate_extensions' => array('csv'), 
+   ), 
+ ); 
+
+ $form['submit'] = array(
+   '#type' => 'submit', 
+   '#value' => t('Save'),
+  ); 
+  	
+	return $form;
+}
+
+
+function statistics_admin_form_submit($form, &$form_state) {
+	 save_stat_uploaded_file('statistics',$form_state);
+}
+
+
+function statistics_form($form, &$form_state) {
+	$from = array();
+	
+	$country 							 				 = get_stat_country();
+	$country_def                   = isset($_GET['country']) ? $_GET['country'] : key($country);
+	$country_value_dropdown_first  = isset($form_state['values']['country']) ? $form_state['values']['country'] : $country_def;
+	
+	$form['country'] = array(
+		'#title' => 'Country',
+  	'#type' => 'select',
+		'#options' => $country,
+		'#default_value' => $country_value_dropdown_first,
+		'#ajax' => array(
+      // When 'event' occurs, Drupal will perform an ajax request in the
+      // background. Usually the default value is sufficient (eg. change for
+      // select elements), but valid values include any jQuery event,
+      // most notably 'mousedown', 'blur', and 'submit'.
+      'event' => 'change',
+      'callback' => 'country_ajax_callback',
+      'wrapper' => 'dropdown-league-replace',
+    ),
+   );
+   
+   
+   $league                       = get_stat_league($country_value_dropdown_first);
+   $league_def                   = isset($_GET['league']) ? $_GET['league'] : key($league);
+   $league_value_dropdown_first  = isset($form_state['values']['league']) ? $form_state['values']['league'] : $league_def;
+   $display_league               = isset($_GET['league']) ? 'display: block;' : 'display: none;';
+
+
+   $path = drupal_get_path('module', 'statistics') . '/img/Small/'.$country_value_dropdown_first.'.png';
+   $img  = '<div id="country_image" style="'.$display_league.'"><img src="'.$path.'" width="50px;"/></div>';
+   
+   $form['country_image'] = array(
+			'#markup' => $img,
+		);
+
+
+	 $form['league'] = array(
+	 	 '#title' => 'League',
+  	 '#type' => 'select',
+  	 '#prefix' => '<div id="dropdown-league-replace" style="'.$display_league.'">',
+     '#suffix' => '</div>',
+		 '#options' => $league,
+		 '#default_value' => $league_value_dropdown_first,
+		 '#ajax' => array(
+      // When 'event' occurs, Drupal will perform an ajax request in the
+      // background. Usually the default value is sufficient (eg. change for
+      // select elements), but valid values include any jQuery event,
+      // most notably 'mousedown', 'blur', and 'submit'.
+       'event' => 'change',
+       'callback' => 'league_ajax_callback',
+       /* 'wrapper' => 'tash', */
+    ),
+   );
+   
+  $path = drupal_get_path('module', 'statistics') . '/img/LeagueLogos/'.$country_value_dropdown_first.'/'.$league_value_dropdown_first.'.jpg';
+  $img  = '<div id="league_image" style="'.$display_league.'"><img src="'.$path.'" width="50px;"/></div>';
+   
+   $form['league_image'] = array(
+			'#markup' => $img,
+		);
+   
+
+   $home_team                  = get_home_team($country_value_dropdown_first, $league_value_dropdown_first);
+   $home_def                   = isset($_GET['home']) ? $_GET['home'] : key($home_team);
+   $home_value_dropdown_first  = isset($form_state['values']['home']) ? $form_state['values']['home'] : $home_def;
+   $display_home               = isset($_GET['home']) ? 'display: block;' : 'display: none;';
+  
+   $away_team                  = get_away_team($country_value_dropdown_first, $league_value_dropdown_first);
+   $away_def                   = isset($_GET['away']) ? $_GET['away'] : key($away_team);
+   $away_value_dropdown_first  = isset($form_state['values']['away']) ? $form_state['values']['away'] : $away_def;
+   $display_away               = isset($_GET['away']) ? 'display: block;margin-left:0px;' : 'display: none;';
+   $display_img_away               = isset($_GET['away']) ? 'display: block;' : 'display: none;';
+
+   $form['home']['#prefix']['#prefix'] = '<div>';
+	 $form['home'] = array(
+	 '#title' => 'Home Team',
+	 '#type' => 'select',
+	 '#prefix' => '<div id="dropdown-h-replace" style="'.$display_home.'">',
+	 '#suffix' => '</div>',
+	 '#options' => $home_team,
+	 '#default_value' => $home_value_dropdown_first,
+	 	'#ajax' => array(
+      // When 'event' occurs, Drupal will perform an ajax request in the
+      // background. Usually the default value is sufficient (eg. change for
+      // select elements), but valid values include any jQuery event,
+      // most notably 'mousedown', 'blur', and 'submit'.
+      'event' => 'change',
+      'callback' => 'home_ajax_callback',
+      /* 'wrapper' => 'dropdown-a-replace', */
+    ),
+   );
+   
+   
+   $path = drupal_get_path('module', 'statistics') . '/img/all/'.$home_value_dropdown_first.'.png';
+   $home_img  = '<div id="home_image" style="'.$display_home.'"><img src="'.$path.'"/></div>';
+   
+   $form['home_image'] = array(
+			'#markup' => $home_img,
+		);
+   
+    $display_submit = (isset($_GET['home']) && isset($_GET['away'])) ? 'display: block;' : 'display: none;';
+
+	$form['search'] = array(
+  	'#type' => 'submit', 
+		'#value' => 'Compare Teams',
+		//'#attributes' => array('onClick' => array('pageScroll();')),
+		'#prefix' => '<div id="compare" style="'.$display_submit.'">',
+	  '#suffix' => '</div>',
+  );
+   
+   
+   $form['away'] = array(
+	 '#title' => 'Away Team',
+	 '#type' => 'select',
+	 '#prefix' => '<div id="dropdown-a-replace" style="'.$display_away.'">',
+	 '#suffix' => '</div>',
+	 '#options' => $away_team,
+	 '#group' => 'home',
+	 '#default_value' => $away_value_dropdown_first,
+	 		 '#ajax' => array(
+      // When 'event' occurs, Drupal will perform an ajax request in the
+      // background. Usually the default value is sufficient (eg. change for
+      // select elements), but valid values include any jQuery event,
+      // most notably 'mousedown', 'blur', and 'submit'.
+      'event' => 'change',
+      'callback' => 'away_ajax_callback',
+      /* 'wrapper' => 'dropdown-a-replace', */
+    ),
+   );
+
+
+   $path = drupal_get_path('module', 'statistics') . '/img/all/'.$away_value_dropdown_first.'.png';
+   $away_img  = '<div id="away_image" style="'.$display_img_away.'"><img src="'.$path.'"/></div>';
+   
+    $form['away_image'] = array(
+			'#markup' => $away_img,
+		);
+   
+if ((isset($_GET['home']) && isset($_GET['away']))) {
+
+	$full_stat_table = theme('table', array(
+		'header' => get_stat_header($_GET['home'], $_GET['away'], $home_img, $away_img),
+		'rows' => get_stat_table_data($form, $form_state),
+		'attributes' => array('class' => array('stat_table')),
+		'#empty' =>t('No Soccer Table Data'),
+		'multiple' => NULL,
+ ));
+ 
+ 	$ha_table = theme('table', array(
+		'header' => get_stat_header($_GET['home'], $_GET['away'], $home_img, $away_img),
+		'rows' => get_hastat_table_data($form, $form_state),
+		'attributes' => array('class' => array('stat_table')),
+		'#empty' =>t('No Soccer Table Data'),
+		'multiple' => NULL,
+ ));
+
+	$ha_matches  = build_filter($_GET['home']);
+	$form['ha_matches'] = array(
+ 	 '#title' => '',
+	 '#type' => 'select',
+	 '#options' => $ha_matches,
+	 '#attributes' => array('id' => array('select-ha'),
+	 'onchange' => 'change_val(this.selectedIndex)'),
+	 '#default_value' => variable_get('ha_matches'),
+	); 
+
+ $full_matches  = build_filter($_GET['home']);
+	$form['full_matches'] = array(
+ 	 '#title' => '',
+	 '#type' => 'select',
+	 '#options' => $full_matches,
+	 '#attributes' => array('id' => array('select-full'),
+	 'onchange' => 'change_full_val(this.selectedIndex)'),
+	 '#default_value' => variable_get('full_matches'),
+	); 
+     
+	$form['quicktabs_search'] = array(
+ 	 '#type' => 'submit', 
+	 '#value' => t('Search'),
+	);
+	
+	$form['quicktabs_full_search'] = array(
+	 '#type' => 'submit', 
+	 '#value' => t('Search'),
+	);
+	
+	$tabs = array(
+  	array('title' => 'Overall Stats',  
+  				'contents' => array(array('#markup' => '<div id="q_search" class="clearfix">'.render($form['full_matches']).drupal_render($form['quicktabs_full_search']).'</div>'),
+  														array('#markup' =>  $full_stat_table)), 
+					'weight' => 0),
+		array('title' => 'Home/Away Stats', 
+		      'contents' => array(array('#markup' => '<div id="q_search" class="clearfix">'.render($form['ha_matches']).drupal_render($form['quicktabs_search']).'</div>'),
+		      										array('#markup' => $ha_table)),
+		      'weight' => 1),
+		);
+		
+	$qtname      = 'stat';
+  $overrides   = array('style' => 'Excel');
+  $tab_content = quicktabs_build_quicktabs($qtname, $overrides ,$tabs);
+  $tabs_result = drupal_render($tab_content);
+	     
+  $form['quicktabs'] = array(
+   '#markup' => $tabs_result,
+	);
+
+
+}	
+	
+	 $form['#prefix'] = '<div id="statistics" class="my-form-class">';
+	 $form['#suffix'] = '</div>';
+  
+  $form['#attached']['css'] = array(
+  	drupal_get_path('module', 'statistics') . '/css/statistics.css',
+ );
+    $form['#attached']['js'] = array(
+  	drupal_get_path('module', 'statistics') . '/js/statistics.js',
+ );
+ 
+	$form['hidden_id'] = array(
+	 '#type' => 'hidden',
+	 '#attributes' => array('id' => array('hiden-value')),
+	 '#default_value' => variable_get('ha_matches'),
+	);
+	
+	$form['full_hidden_id'] = array(
+	 '#type' => 'hidden',
+	 '#attributes' => array('id' => array('full-hiden-value')),
+	 '#default_value' => variable_get('full_hidden_id'),
+	);
+	
+		$form['qt_stat'] = array(
+	 '#type' => 'hidden',
+	 '#attributes' => array('id' => array('qt-stat')),
+	 '#default_value' => 0,
+	);
+
+	return $form;
+}
+
+function statistics_form_submit($form, &$form_state) {
+
+
+  $league       = $form_state['values']['league'];
+  $country      = $form_state['values']['country'];
+  $home         = $form_state['values']['home'];
+  $away         = $form_state['values']['away'];
+  $ha_matches   = $form_state['values']['hidden_id'];
+  $full_matches = $form_state['values']['full_hidden_id'];
+  $qt_stat      = $form_state['values']['qt_stat'];
+  
+	variable_set('league_stat', $league);
+	variable_set('country_stat', $country);
+	variable_set('home_stat', $home);
+	variable_set('away_stat', $away);
+	variable_set('ha_matches', $ha_matches);
+	variable_set('full_hidden_id', $full_matches);
+	
+	if ($form_state['values']['op'] == 'Compare Teams') {
+		variable_set('ha_matches', 0);
+	  variable_set('full_hidden_id', 0);
+}
+  
+  drupal_goto('teams-comparison', array('query' => array('country' => $country,'league' => $league,'full_matches' => $full_matches,'ha_matches' => $ha_matches,'home' => $home,'away' => $away,'qt-stat'=>$qt_stat)));
+  $form_state['rebuild'] = TRUE;
+}
+
+function country_ajax_callback($form, $form_state) {
+	$commands = array();
+	
+	$commands[] = ajax_command_replace('#dropdown-league-replace',render($form['league']));
+	$commands[] = ajax_command_invoke('#dropdown-league-replace', 'fadeIn',array(500));
+	
+	$commands[] = ajax_command_replace('#country_image',render($form['country_image']));
+	$commands[] = ajax_command_invoke('#country_image', 'fadeIn',array(500));
+	$commands[] = ajax_command_invoke('#compare', 'fadeOut',array(500));
+	$commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '170px'));
+	
+	$commands[] = ajax_command_replace('#dropdown-h-replace', render($form['home']));
+	$commands[] = ajax_command_invoke('#dropdown-h-replace', 'fadeOut',array(500));
+	
+	$commands[] = ajax_command_replace('#dropdown-a-replace', render($form['away']));
+	$commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '170px'));
+	$commands[] = ajax_command_invoke('#dropdown-a-replace', 'fadeOut',array(500));
+	
+	$commands[] = ajax_command_replace('#away_image', render($form['away_image']));
+	$commands[] = ajax_command_invoke('#away_image', 'fadeOut',array(500));
+	
+	$commands[] = ajax_command_replace('#home_image', render($form['home_image']));
+  $commands[] = ajax_command_invoke('#home_image', 'fadeOut',array(500));
+	
+	return array('#type' => 'ajax','#commands' => $commands);
+}
+
+function league_ajax_callback($form, $form_state) {
+	$commands = array();
+	$commands[] = ajax_command_replace('#dropdown-h-replace', render($form['home']));
+	$commands[] = ajax_command_invoke('#dropdown-h-replace', 'fadeIn',array(500));
+	
+	$commands[] = ajax_command_replace('#dropdown-a-replace', render($form['away']));
+	$commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '170px'));
+	$commands[] = ajax_command_invoke('#dropdown-a-replace', 'fadeIn',array(500));
+		
+	$commands[] = ajax_command_replace('#league_image', render($form['league_image']));
+	$commands[] = ajax_command_invoke('#league_image', 'fadeIn',array(500));
+	$commands[] = ajax_command_invoke('#compare', 'fadeOut',array(500));
+	$commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '170px'));
+	
+	return array('#type' => 'ajax','#commands' => $commands);
+}
+
+
+function away_ajax_callback($form, &$form_state) {
+	$home     	= $form_state['values']['home'];
+  $away     	= $form_state['values']['away'];
+  $commands 	= array();
+	$commands[] = ajax_command_replace('#away_image', render($form['away_image']));
+	$commands[] = ajax_command_invoke('#away_image', 'fadeIn',array(500));
+	$commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '170px'));
+	
+if ($home != '0' && $away != '0') {
+		$commands[] = ajax_command_invoke('#compare', 'fadeIn',array(500));
+		$commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '0px'));
+	}else{
+		$commands[] = ajax_command_invoke('#compare', 'fadeOut',array(500));
+	}
+	return array('#type' => 'ajax','#commands' => $commands);
+}
+
+function home_ajax_callback($form, &$form_state) {
+	$home     = $form_state['values']['home'];
+  $away     = $form_state['values']['away'];
+  $commands = array();
+
+   $commands[] = ajax_command_replace('#home_image', render($form['home_image']));
+   $commands[] = ajax_command_invoke('#home_image', 'fadeIn',array(500));
+   $commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '170px'));
+   
+   if ($home != '0' && $away != '0') {
+   		$commands[] = ajax_command_css('#dropdown-a-replace', array('margin-left' => '0px'));
+		 $commands[] = ajax_command_invoke('#compare', 'fadeIn',array(500));
+	 }else {
+		$commands[] = ajax_command_invoke('#compare', 'fadeOut',array(500));
+	 }
+	 return array('#type' => 'ajax','#commands' => $commands);
+}

@@ -1,0 +1,31 @@
+ <?php
+
+module_load_include('inc', 'prd_statistic', 'includes/prd_statistic.util');
+
+
+function prd_statistic_block_info() {  
+  
+  $blocks['yc_stat'] = array(
+    // info: The name of the block.
+    'info' => t('YC stat'),
+  );
+  return $blocks;
+}
+
+function prd_statistic_block_view($delta = '') {
+  // The $delta parameter tells us which block is being requested.
+
+  $block = array();
+  drupal_add_js(drupal_get_path('module', 'prd_statistic') .'/js/prd_statistic.js');
+  drupal_add_css(drupal_get_path('module', 'prd_statistic') .'/css/prd_statistic.css');
+  switch ($delta) {
+    case 'yc_stat':
+      // Create your block content here
+      $block['subject'] = t('YC Stat');
+      $total_user = get_table();
+      $block['content'] = $total_user;
+     break;
+  }
+  return $block;
+}
+

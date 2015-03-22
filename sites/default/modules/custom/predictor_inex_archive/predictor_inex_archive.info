@@ -1,0 +1,6 @@
+name = Soccer Predictor	insider/exclusive
+description = Adding manually Predictor Archives for insider/exclusive Soccer Scores 
+
+core = 7.x
+version = "7.x"
+package = KSG

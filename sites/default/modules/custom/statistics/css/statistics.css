@@ -1,0 +1,196 @@
+#edit-country, #dropdown-league-replace .form-select, #dropdown-h-replace .form-select, #dropdown-a-replace .form-select{
+	width: 240px;
+	font-size: 12px;
+/* 	font-weight: bold; */
+}
+
+#dropdown-stat-type-replace{
+	margin-top: 23px;
+}
+
+#dropdown-stat-type-replace .form-select{
+	width: 290px;
+	font-size: 15px;
+}
+
+.form-item label {
+	font-size: 16px!important;
+}
+
+#statistics{
+	text-align: center;
+}
+
+#dropdown-h-replace{
+	float: left;
+	margin-left: 169px;
+}
+
+#dropdown-a-replace{
+	float: left;
+	margin-left: 112px;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+     
+#compare{
+	float: left;
+	margin: 36px 8px 0px 8px;
+}
+
+#compare input.form-submit{
+  background: #cc0000!important;
+  background-image: -webkit-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: -moz-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: -ms-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: -o-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: linear-gradient(to bottom, #0A3F63, #000000)!important;
+  -webkit-border-radius: 12!important;
+  -moz-border-radius: 12!important;
+  border-radius: 12px!important;
+  -webkit-box-shadow: 0px 1px 3px #666666!important;
+  -moz-box-shadow: 0px 1px 3px #666666!important;
+  box-shadow: 0px 1px 3px #666666!important;
+  font-family: Arial!important;
+  color: #ffffff!important;
+	font-size: 12px!important;
+	padding: 3px 20px 3px 20px!important;
+  text-decoration: none!important;
+}
+
+#compare:hover {
+  text-decoration: none;
+}
+
+#q_search input.form-submit{
+  background: #cc0000!important;
+  background-image: -webkit-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: -moz-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: -ms-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: -o-linear-gradient(top, #0A3F63, #000000)!important;
+  background-image: linear-gradient(to bottom, #0A3F63, #000000)!important;
+  -webkit-border-radius: 12!important;
+  -moz-border-radius: 12!important;
+  border-radius: 12px!important;
+  -webkit-box-shadow: 0px 1px 3px #666666!important;
+  -moz-box-shadow: 0px 1px 3px #666666!important;
+  box-shadow: 0px 1px 3px #666666!important;
+  font-family: Arial!important;
+  color: #ffffff!important;
+	font-size: 12px!important;
+	padding: 2px 24px 2px 24px!important;
+  text-decoration: none!important;
+}
+
+
+#home_image{
+	float: left;
+	margin-left: -140px;
+	margin-top: 70px;
+}
+
+#away_image{
+	float: left;
+	margin-left: -135px;
+	margin-top: 70px;
+}     
+
+#statistics_table{
+ margin-top: 181px;
+}
+
+tr td, tr th{
+	text-align: center!important;
+}
+
+tr.odd{
+	background: rgb(131, 211, 92)!important;
+}
+tr.even{
+	background: rgb(202, 255, 122)!important;
+}
+
+tr.even:hover, tr.odd:hover{
+	background:white!important;
+}
+
+th #home_image, th #away_image{
+	float: none!important;
+	margin-left: 0px!important;
+	margin-top: 0px!important;
+}
+
+
+#quicktabs-stat{
+	margin-top: 200px;
+}
+
+#q_search{
+}
+#q_search .form-type-select, #q_search.form-submit{
+	float: left;
+}
+#q_search .form-submit{
+	margin-right: 676px;
+}
+#q_search #edit-quicktabs-search{
+	position: absolute;
+	margin-left: 62px;
+	margin-top: -38px;
+}
+
+#tb-chart-right{
+	 font: 10px sans-serif;
+  background-image: linear-gradient(to bottom, #FF0000, #000000);
+  text-align: right;
+  box-shadow: 1px 1px 1px 0px black;
+ }
+ 
+#tb-chart-left{
+	font: 10px sans-serif;
+  background-image: linear-gradient(to bottom, #E30E1C, #000000);
+  text-align: left;
+  box-shadow: 1px 1px 1px 0px black;
+}
+#tb-chart-left-eq{
+	font: 10px sans-serif;
+  background-image: linear-gradient(to bottom, #6181BD, #000000);
+  text-align: left;
+  box-shadow: 1px 1px 1px 0px black;
+}
+#tb-chart-left-less{
+	font: 10px sans-serif;
+  background-image: linear-gradient(to bottom, #6181BD, #000000);
+  text-align: left;
+  box-shadow: 1px 1px 1px 0px black;
+}
+#tb-chart-right{
+	font: 10px sans-serif;
+  background-image: linear-gradient(to bottom, #E30E1C, #000000);
+  text-align: right;
+  box-shadow: 1px 1px 1px 0px black;
+}
+#tb-chart-right-eq{
+	font: 10px sans-serif;
+  background-image: linear-gradient(to bottom, #6181BD, #000000);
+  text-align: right;
+  box-shadow: 1px 1px 1px 0px black;
+}
+#tb-chart-right-less{
+	font: 10px sans-serif;
+  background-image: linear-gradient(to bottom, #6181BD, #000000);
+  text-align: right;
+  box-shadow: 1px 1px 1px 0px black;
+}
+td, tbody td{
+	background: none!important;
+}
+
+/* ========= */
