@@ -124,7 +124,7 @@ function corners_form($form, &$form_state) {
  );
 	
   $form['corners_set']['title'] = array(
-   '#markup' => '<h1 style="background: rgb(249, 249, 249);color:#0A3F63;text-align:center;">Corners Prediction</h1>',
+   '#markup' => '<h1 style="background: rgb(249, 249, 249);color:#0A3F63;text-align:center;">Corner Predictions</h1>',
   );
 	
 	$form['corners_set']['filter'] = array(
@@ -195,7 +195,7 @@ function cards_form($form, &$form_state) {
  );
   
   $form['cards_set']['title'] = array(
-  '#markup' => '<h1 style="background: rgb(249, 249, 249);color:#0A3F63;text-align:center;">Cards Prediction</h1>',
+  '#markup' => '<h1 style="background: rgb(249, 249, 249);color:#0A3F63;text-align:center;">Yellow Card Predictions</h1>',
  );
 	
 	$form['cards_set']['filter'] = array(
