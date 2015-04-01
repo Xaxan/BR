@@ -345,6 +345,13 @@ function predictor_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'yc_vip' => array(
+        'description' => 'The title of this node, always treated as non-markup plain text.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
       'vip' => array(
         'description' => 'The title of this node, always treated as non-markup plain text.',
         'type' => 'varchar',
@@ -687,6 +694,13 @@ function predictor_schema() {
         'default' => '',
       ),
       'corner' => array(
+        'description' => 'The title of this node, always treated as non-markup plain text.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'yc_vip' => array(
         'description' => 'The title of this node, always treated as non-markup plain text.',
         'type' => 'varchar',
         'length' => 255,

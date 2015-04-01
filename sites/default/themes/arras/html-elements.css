@@ -148,3 +148,7 @@ tr.even:hover, tr.odd:hover{
   background: #368c04;
   text-decoration: none;
 }
+
+#corners-form table, #cards-form table{
+	font-size: 13px;
+}

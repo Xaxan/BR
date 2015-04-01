@@ -1,22 +1,22 @@
 <?php
 
 
-function get_yc_header(){
+function get_corners_header(){
 
 	  $header[] = array(
     'date'        => array('data' =>'Match info', 'colspan' => 7, 
     'style' => array('color:white;white-space:nowrap;text-align: center;background:#0A3F63; background-image: -webkit-linear-gradient(top, #0A3F63, #000000); background-image: -moz-linear-gradient(top, #0A3F63, #000000); background-image: -ms-linear-gradient(top, ##0A3F63, #000000); background-image: -o-linear-gradient(top, ##0A3F63, #000000); background-image: linear-gradient(to bottom, #0A3F63, #000000);'), 
     'class'=> array('sticky-header')),
     
-    'competition' => array('data' =>'Rates', 'colspan' => 2, 
+    'competition' => array('data' =>'Rates', 'colspan' => 1, 
     'style' => array('color:white;white-space:nowrap;text-align: center;background:#0A3F63; background-image: -webkit-linear-gradient(top, #0A3F63, #000000); background-image: -moz-linear-gradient(top, #0A3F63, #000000); background-image: -ms-linear-gradient(top, ##0A3F63, #000000); background-image: -o-linear-gradient(top, ##0A3F63, #000000); background-image: linear-gradient(to bottom, #0A3F63, #000000); '), 
     'class'=> array('sticky-header')),
     
-    'home_team'   => array('data' =>'Predictions', 'colspan' => 2, 
+    'home_team'   => array('data' =>'Predictions', 'colspan' => 1, 
     'style' => array('color:white;white-space:nowrap;text-align: center;background:#0A3F63; background-image: -webkit-linear-gradient(top, #0A3F63, #000000); background-image: -moz-linear-gradient(top, #0A3F63, #000000); background-image: -ms-linear-gradient(top, ##0A3F63, #000000); background-image: -o-linear-gradient(top, ##0A3F63, #000000); background-image: linear-gradient(to bottom, #0A3F63, #000000); '), 
     'class'=> array('sticky-header')),
     
-    'away_team'   => array('data' =>'Results', 'colspan' => 2, 
+    'away_team'   => array('data' =>'Results', 'colspan' => 1, 
     'style' => array('color:white;white-space:nowrap;text-align: center;background:#0A3F63; background-image: -webkit-linear-gradient(top, #0A3F63, #000000); background-image: -moz-linear-gradient(top, #0A3F63, #000000); background-image: -ms-linear-gradient(top, ##0A3F63, #000000); background-image: -o-linear-gradient(top, ##0A3F63, #000000); background-image: linear-gradient(to bottom, #0A3F63, #000000); '), 
     'class'=> array('sticky-header')),
     
@@ -77,11 +77,13 @@ background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
 
+/*
     'prr' => array('data' => t('PrR (YC)'), 'field' => 'u.time','style' => array('width: 46px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
+*/
 
     'pro'      => array('data' => t('PrR (Cor)'), 'field' => 'u.flags','style' => array('width:50px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
@@ -89,11 +91,13 @@ background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
+/*
     'yellow_cards_ou' => array('data' => t('YC O/U'), 'field' => 'u.yellow_cards_ou','style' => array('width:53px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
+*/
 
     'corners_ou'      => array('data' => t('Cor O/U'), 'field' => 'u.corners_ou','style' => array('width:42px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
@@ -101,11 +105,13 @@ background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
+/*
    'yellow_cards'    => array('data' => t('YC'), 'field' => 'u.yellow_cards','style' => array('width: 49px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
+*/
 
     'corner'          => array('data' => t('Cor'), 'field' => 'u.corner','style' => array('background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
@@ -130,8 +136,8 @@ background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 	return $header;
 }
 
-function get_yc_table_data(){
- $header = get_yc_header();
+function get_corners_table_data(){
+ $header = get_corners_header();
 
 	$query = db_select('predictor_corners', 'u')
 	->extend('TableSort');
@@ -209,11 +215,11 @@ foreach ($result as $scores) {
     'competition'     => array('data' => $scores->competition, 'style' => array('white-space:nowrap;')),
     'home_team'       => array('data' => $scores->home_team, 'style' => array('white-space:nowrap;')),
     'away_team'       => array('data' => $scores->away_team, 'style' => array('white-space:nowrap;')),
-    'prr'             => get_yc_prr_coloring(trim($scores->prr_yc)),
+    //'prr'             => get_yc_prr_coloring(trim($scores->prr_yc)),
     'pro'             => get_yc_prr_coloring(trim($scores->prr_cor)),
-    'yellow_cards_ou' => yellow_cards_ou_data_render_rules($scores->yellow_cards_ou, $scores->vip, $scores->yellow_cards),
+    //'yellow_cards_ou' => yellow_cards_ou_data_render_rules($scores->yellow_cards_ou, $scores->vip, $scores->yellow_cards),
     'corners_ou'      => corners_ou($scores->corners_ou, $scores->vip, $scores->corner),
-    'yellow_cards'    => data_render_rules($scores->yellow_cards, $scores->vip),
+    //'yellow_cards'    => data_render_rules($scores->yellow_cards, $scores->vip),
     'corner'          => data_render_rules($scores->corner, $scores->vip),
     'vip'             => vip_data_render_rules($scores->vip, $scores->vip),
     'stat'            => array('data' => get_stat_link($scores->country, $scores->competition, $scores->home_team, $scores->away_team), 'style' => array('text-align:center;')),

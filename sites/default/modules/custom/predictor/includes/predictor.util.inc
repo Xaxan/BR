@@ -1,6 +1,6 @@
 <?php
 
-function insert_final_record($table, $date, $time, $iso, $country, $competition, $home_team, $away_team, $w1, $draw, $W2, $prr, $pro, $prr_yc, $pro_co, $result, $bts, $goals_ou, $yellow_cards_ou, $corner_ou, $home_team_score, $away_team_score, $yellow_cards, $corner, $vip) {
+function insert_final_record($table, $date, $time, $iso, $country, $competition, $home_team, $away_team, $w1, $draw, $W2, $prr, $pro, $prr_yc, $pro_co, $result, $bts, $goals_ou, $yellow_cards_ou, $corner_ou, $home_team_score, $away_team_score, $yellow_cards, $corner, $yc_vip, $vip) {
  	
 		db_insert('predictor_'.$table)
     ->fields(array(
@@ -27,6 +27,7 @@ function insert_final_record($table, $date, $time, $iso, $country, $competition,
 					'away_team_score' => $away_team_score, 
 					'yellow_cards'    => $yellow_cards,
 					'corner'          => $corner,
+					'yc_vip'          => $yc_vip,
 					'vip'             => $vip,
 					))->execute();
 }
@@ -60,7 +61,7 @@ function save_uploaded_file($table, $form_state) {
 	
 if(!empty($newarray)){db_truncate('predictor_'.$table)->execute();}
 foreach ($newarray as $key=>$value){
-	
+
 	insert_final_record($table, $value[0],  //date
 											$value[1],  //time
 											$value[2],  //iso
@@ -84,7 +85,8 @@ foreach ($newarray as $key=>$value){
 											$value[20], //away_team_score
 											$value[21], //yellow_cards
 											$value[22], //corner
-											$value[23] //vip
+											$value[23], //yc_vip
+											$value[24] //vip
 										);
 								}
 								drupal_set_message(t("Soccer Scores Saved Successfully!"), 'status');
@@ -144,11 +146,11 @@ function goals_ou_data_render_rules($data, $vip, $home, $away) {
 	return $result;
 }
 
-function yellow_cards_ou_data_render_rules($data, $vip, $yellow_cards, $type = NULL, $prr = NULL, $arg = NULL) {
+function data_render_rules_yellow_cards_ou($data, $vip, $yellow_cards, $type = NULL, $prr = NULL, $arg = NULL) {
   global $user;
 	$result = $data;
 
-	if ($vip == 'VIPU' && !user_has_role('memberCC')) {
+	if ($vip == 'VIPU' && !user_has_role('memberY')) {
 		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif ($vip != 'VIP' && $yellow_cards !='na') {
  		$result = get_yellow_cards_ou_color($data, $yellow_cards, $type, $prr, $arg);
@@ -162,7 +164,7 @@ function corners_ou($data, $vip, $corners, $archive = NULL, $pro = NULL, $arg = 
 	$result = $data;
 	
 	if ($vip == 'VIPU' && !user_has_role('memberCC')) {
-		$result = array('data' =>'VIP','style' => array('color:white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
+		$result = array('data' =>'','style' => array('color:white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif ($vip != 'VIP' && $corners !='na') {
  		$result = get_corners_ou_color($data, $corners, $archive, $pro, $arg);
  	}else{
@@ -187,12 +189,45 @@ elseif($vip == 'VIPV'){
 	return $result;
 }
 
-function vip_data_render_rules($data, $vip){
+function vip_data_render_rules($data, $vip) {
+
 global $user;
 	$result = $data;
 	if ($vip == 'VIPU' && !user_has_role('memberCC','member1X2')) {
-		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
+		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif($data == 'VIPV' && $vip == 'VIPV'){
+		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
+	}elseif($vip == 'VIPU' && user_has_role('memberCC','member1X2')){
+		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
+	}
+
+	return $result;
+}
+
+
+function data_render_rules_yellow_cards($data, $vip){
+global $user;
+	$result = $data;
+	if ($vip == 'VIPU' && !user_has_role('memberY','member1X2')) {
+		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
+	}/*
+elseif($vip == 'VIPV'){
+		$result = array('data' =>$data,'style' => array('background-color:white;border-right-color:white;'));
+	}
+*/
+
+	return $result;
+}
+
+function vip_data_render_rules_yellow_cards($data, $vip) {
+
+global $user;
+	$result = $data;
+	if ($vip == 'VIPU' && !user_has_role('memberY','member1X2')) {
+		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
+	}elseif($data == 'VIPV' && $vip == 'VIPV'){
+		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
+  }elseif($vip == 'VIPU' && user_has_role('memberY','member1X2')){
 		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
 	}
 
