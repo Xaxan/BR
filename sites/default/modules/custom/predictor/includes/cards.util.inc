@@ -230,6 +230,7 @@ if(isset($_GET['sort']) && isset($_GET['order'])){
 
 
 	$result = $query->fields('u', array('date','time','iso','country','competition', 'home_team', 'away_team','prr_yc','prr_cor','yellow_cards_ou', 'corners_ou', 'yellow_cards', 'corner', 'yc_vip', 'vip'))
+	->condition('prr_yc', 'High','=')
 	->orderBy($order, $sort)
 	->execute();
 
