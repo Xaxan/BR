@@ -154,6 +154,8 @@ function data_render_rules_yellow_cards_ou($data, $vip, $yellow_cards, $type = N
 		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif ($vip != 'VIP' && $yellow_cards !='na') {
  		$result = get_yellow_cards_ou_color($data, $yellow_cards, $type, $prr, $arg);
+ 	}else{
+	 	$result = array('data' => $data,'style' => array('text-align: center;'));
  	}
 
 	return $result;
@@ -168,7 +170,7 @@ function corners_ou($data, $vip, $corners, $archive = NULL, $pro = NULL, $arg = 
 	}elseif ($vip != 'VIP' && $corners !='na') {
  		$result = get_corners_ou_color($data, $corners, $archive, $pro, $arg);
  	}else{
-	 	$result = array('data' => $data,'style' => array('font-size: 10px;'));
+	 	$result = array('data' => $data,'style' => array('text-align: center;'));
  	}
 
 	return $result;
@@ -184,7 +186,9 @@ global $user;
 elseif($vip == 'VIPV'){
 		$result = array('data' =>$data,'style' => array('background-color:white;border-right-color:white;'));
 	}
-*/
+*/else{
+	 	$result = array('data' => $data,'style' => array('text-align: center;'));
+ 	}
 
 	return $result;
 }
@@ -196,9 +200,9 @@ global $user;
 	if ($vip == 'VIPU' && !user_has_role('memberCC','member1X2')) {
 		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif($data == 'VIPV' && $vip == 'VIPV'){
-		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
+		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align:center;'));
 	}elseif($vip == 'VIPU' && user_has_role('memberCC','member1X2')){
-		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
+		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align:center;'));
 	}
 
 	return $result;
@@ -226,9 +230,9 @@ global $user;
 	if ($vip == 'VIPU' && !user_has_role('memberY','member1X2')) {
 		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif($data == 'VIPV' && $vip == 'VIPV'){
-		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
+		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align: center;'));
   }elseif($vip == 'VIPU' && user_has_role('memberY','member1X2')){
-		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;'));
+		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align: center;'));
 	}
 
 	return $result;
@@ -344,20 +348,20 @@ function get_yellow_cards_ou_color($data, $yellow_cards_result, $archive = NULL,
 	 switch ($str_indes) {
     case 'O':
         if ((int)$yellow_cards < $yellow_cards_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif((int)$yellow_cards == $yellow_cards_result){  
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
         break;
     case 'U':
         	if ((int)$yellow_cards > $yellow_cards_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif((int)$yellow_cards == $yellow_cards_result){ 
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
         break;
     }
@@ -368,20 +372,20 @@ function get_yellow_cards_ou_color($data, $yellow_cards_result, $archive = NULL,
 		switch ($str_indes) {
     case 'O':
         if ((int)$yellow_cards < $yellow_cards_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif((int)$yellow_cards == $yellow_cards_result){  
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
         break;
     case 'U':
         	if ((int)$yellow_cards > $yellow_cards_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif((int)$yellow_cards == $yellow_cards_result){ 
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
         break;
 		}
@@ -401,21 +405,21 @@ function get_corners_ou_color($data, $corners, $archive = NULL, $pro = NULL, $ar
 		switch ($str_indes) {
     case 'O':
         if ((int)$corners_ou < $corners_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif ((int)$corners_ou == $corners_result) { 
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
 
         break;
     case 'U':
           if ((int)$corners_ou > $corners_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif ((int)$corners_ou == $corners_result) { 
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
 
         break;
@@ -428,21 +432,21 @@ function get_corners_ou_color($data, $corners, $archive = NULL, $pro = NULL, $ar
 		switch ($str_indes) {
     case 'O':
         if ((int)$corners_ou < $corners_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif ((int)$corners_ou == $corners_result) { 
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
 
         break;
     case 'U':
           if ((int)$corners_ou > $corners_result) { 
-        		return array('data' => $data,'style' => array('color:green;font-weight: bold;font-size: 10px;')); 
+        		return array('data' => $data,'style' => array('color:green;font-weight: bold;text-align: center;')); 
         	}elseif ((int)$corners_ou == $corners_result) { 
-	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:#D48D0B;font-weight: bold;text-align: center;'));	
         	}else{
-	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;font-size: 10px;'));	
+	        	return array('data' => $data,'style' => array('color:red;font-weight: bold;text-align: center;'));	
         	}
 
         break;
