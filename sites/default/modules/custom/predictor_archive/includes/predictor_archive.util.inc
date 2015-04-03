@@ -134,7 +134,7 @@ foreach ($result as $scores) {
     'away_team'       => array('data' => $scores->away_team, 'style' => array('white-space:nowrap;')),
     'prr'             => get_yc_prr_coloring($scores->prr_yc),
     'pro'             => get_yc_prr_coloring($scores->prr_cor),
-    'yellow_cards_ou' => yellow_cards_ou_data_render_rules($scores->yellow_cards_ou, $scores->vip, $scores->yellow_cards, 'archive', $scores->prr_yc, $arg),
+    'yellow_cards_ou' => data_render_rules_yellow_cards_ou($scores->yellow_cards_ou, $scores->vip, $scores->yellow_cards, 'archive', $scores->prr_yc, $arg),
     'corners_ou'      => corners_ou($scores->corners_ou, $scores->vip, $scores->corner, 'archive', $scores->prr_cor, $arg),
     'yellow_cards'    => data_render_rules($scores->yellow_cards, $scores->vip),
     'corner'          => data_render_rules($scores->corner, $scores->vip),
