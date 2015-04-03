@@ -176,3 +176,34 @@ tr.even:hover, tr.odd:hover{
  font-weight: bold;
  color: rgb(87, 87, 87);
 }
+
+#block-user-online p{
+  margin-top: 1px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#block-user-online .item-list{
+  list-style-type: none;
+}
+
+#block-user-online ul{
+	background: rgb(90, 1, 1);
+
+}
+
+#block-user-online ul li{
+  list-style-type: none;
+  text-align: left;
+  text-transform: capitalize;
+  padding: 2px 0px 2px 45px;
+  margin: 0px;
+  border-bottom: 1px solid silver;
+  background-image: url("images/15-Tick-icon.png");
+  background-repeat: no-repeat;
+  background-position: 130px;
+}
+
+#block-user-online ul li a, #block-user-online ul li span{
+	color: white;
+}
