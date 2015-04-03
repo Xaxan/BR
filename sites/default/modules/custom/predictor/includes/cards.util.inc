@@ -33,7 +33,7 @@ function get_cards_header(){
 	  $header[] = array(
 	    'date'  => array('data' => t('Date'), 
   	  								'field' => 'u.date',
-											'style' => array('width:75px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+											'style' => array('width:833px !important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																				background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																				background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																				background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -42,7 +42,7 @@ function get_cards_header(){
 
     'time' => array('data' => t('Time'), 
     								'field' => 'u.time',
-    								'style' => array('width:32px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    								'style' => array('width:85px !important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																			background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																			background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																			background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -50,7 +50,7 @@ function get_cards_header(){
 
     'flags' => array('data' => t('Fl'), 
     								'field' => 'u.flags',
-    								'style' => array('width:18px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    								'style' => array('width:84px !important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																			background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																			background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																			background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -59,7 +59,7 @@ function get_cards_header(){
 
     'country' => array('data' => t('Country'), 
     									 'field' => 'u.country',
-    									 'style' => array('width:88px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    									 'style' => array('width:175px !important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																				background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																				background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																				background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -68,7 +68,7 @@ function get_cards_header(){
 
    'competition' => array('data' => t('League Name'), 
    														'field' => 'u.competition',
-   														'style' => array('width: 117px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+   														'style' => array('width:1009px !important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																								background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																								background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																								background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -76,7 +76,7 @@ function get_cards_header(){
 
    'home_team' => array('data' => t('Home Team'), 
    											'field' => 'u.home_team',
-   											'style' => array('width: 123px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+   											'style' => array('width:1341px !important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																					background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																					background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																					background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -84,7 +84,7 @@ function get_cards_header(){
 
     'away_team' => array('data' => t('Away Team'), 
     										 'field' => 'u.away_team',
-    										 'style' => array('width: 133px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    										 'style' => array('width:1271px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																						background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																						background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																						background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -93,7 +93,7 @@ function get_cards_header(){
 
     'prr' => array('data' => t('PrR (YC)'), 
     							 'field' => 'u.time',
-    							 'style' => array('width: 46px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    							 'style' => array('width:83px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																			background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																			background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																			background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -111,7 +111,7 @@ function get_cards_header(){
 
     'yellow_cards_ou' => array('data' => t('YC O/U'), 
     													 'field' => 'u.yellow_cards_ou',
-    													 'style' => array('width:53px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    													 'style' => array('width:1px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 																									background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 																									background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 																									background-image: -o-linear-gradient(top, ##0A3F63, #000000);

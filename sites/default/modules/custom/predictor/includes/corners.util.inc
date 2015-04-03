@@ -31,46 +31,46 @@ function get_corners_header(){
 
 
 	  $header[] = array(
-    'date'            => array('data' => t('Date'), 'field' => 'u.date','style' => array('width:75px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    'date'            => array('data' => t('Date'), 'field' => 'u.date','style' => array('width:762px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
 
-    'time' => array('data' => t('Time'), 'field' => 'u.time','style' => array('width:32px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    'time' => array('data' => t('Time'), 'field' => 'u.time','style' => array('width:85px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
-    'flags'      => array('data' => t('Fl'), 'field' => 'u.flags','style' => array('width:18px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
-background-image: -moz-linear-gradient(top, #0A3F63, #000000);
-background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
-background-image: -o-linear-gradient(top, ##0A3F63, #000000);
-background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
-
-
-    'country'      => array('data' => t('Country'), 'field' => 'u.country','style' => array('width:88px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    'flags'      => array('data' => t('Fl'), 'field' => 'u.flags','style' => array('width:84px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
 
-    'competition'     => array('data' => t('League Name'), 'field' => 'u.competition','style' => array('width: 117px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    'country'      => array('data' => t('Country'), 'field' => 'u.country','style' => array('width:682px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
-    'home_team'       => array('data' => t('Home Team'), 'field' => 'u.home_team','style' => array('width: 123px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+
+    'competition'     => array('data' => t('League Name'), 'field' => 'u.competition','style' => array('width:1009px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 
-    'away_team'       => array('data' => t('Away Team'), 'field' => 'u.away_team','style' => array('width: 133px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    'home_team'       => array('data' => t('Home Team'), 'field' => 'u.home_team','style' => array('width: 1341px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+background-image: -moz-linear-gradient(top, #0A3F63, #000000);
+background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
+background-image: -o-linear-gradient(top, ##0A3F63, #000000);
+background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
+
+    'away_team'       => array('data' => t('Away Team'), 'field' => 'u.away_team','style' => array('width: 1271px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -85,7 +85,7 @@ background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 */
 
-    'pro'      => array('data' => t('PrR (Cor)'), 'field' => 'u.flags','style' => array('width:50px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    'pro'      => array('data' => t('PrR (Cor)'), 'field' => 'u.flags','style' => array('width:1	px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
@@ -99,7 +99,7 @@ background-image: -o-linear-gradient(top, ##0A3F63, #000000);
 background-image: linear-gradient(to bottom, #FFFFFF, #DDD);')),
 */
 
-    'corners_ou'      => array('data' => t('Cor O/U'), 'field' => 'u.corners_ou','style' => array('width:42px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
+    'corners_ou'      => array('data' => t('Cor O/U'), 'field' => 'u.corners_ou','style' => array('width:49px!important;background-image: -webkit-linear-gradient(top, #0A3F63, #000000);
 background-image: -moz-linear-gradient(top, #0A3F63, #000000);
 background-image: -ms-linear-gradient(top, ##0A3F63, #000000);
 background-image: -o-linear-gradient(top, ##0A3F63, #000000);
