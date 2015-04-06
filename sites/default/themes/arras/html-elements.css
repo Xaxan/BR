@@ -207,3 +207,19 @@ tr.even:hover, tr.odd:hover{
 #block-user-online ul li a, #block-user-online ul li span{
 	color: white;
 }
+
+#block-views-news-block-1 .views-row{
+	border-bottom: 1px dashed silver;
+}
+
+#block-views-news-block-1 .views-field{
+	 padding-bottom: 4px;
+}
+
+#block-views-news-block-1 .field-content a{
+	 font-weight: bold;
+}
+
+#block-views-news-block-1 .item-list ul li{
+	margin: 0px;
+}
