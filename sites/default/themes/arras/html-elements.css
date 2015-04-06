@@ -196,7 +196,7 @@ tr.even:hover, tr.odd:hover{
   list-style-type: none;
   text-align: left;
   text-transform: capitalize;
-  padding: 2px 0px 2px 45px;
+  padding: 2px 0px 2px 18px;
   margin: 0px;
   border-bottom: 1px solid silver;
   background-image: url("images/15-Tick-icon.png");
