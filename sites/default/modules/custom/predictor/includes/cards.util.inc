@@ -228,11 +228,20 @@ if(isset($_GET['sort']) && isset($_GET['order'])){
 		variable_set('corner_country', '0');
 }
 
-
-	$result = $query->fields('u', array('date','time','iso','country','competition', 'home_team', 'away_team','prr_yc','prr_cor','yellow_cards_ou', 'corners_ou', 'yellow_cards', 'corner', 'yc_vip', 'vip'))
+	$is_full = variable_get('publish_full', 0);
+	
+	if ($is_full != 1) {
+		$result = $query->fields('u', array('date','time','iso','country','competition', 'home_team', 'away_team','prr_yc','yellow_cards_ou', 'yellow_cards', 'yc_vip', 'vip'))
 	->condition('prr_yc', 'High','=')
 	->orderBy($order, $sort)
+	->execute();	
+	}else{
+		$result = $query->fields('u', array('date','time','iso','country','competition', 'home_team', 'away_team','prr_yc','yellow_cards_ou', 'yellow_cards', 'yc_vip', 'vip'))
+	->orderBy($order, $sort)
 	->execute();
+	}
+
+	
 
 $rows = array();
 
