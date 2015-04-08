@@ -1,12 +1,12 @@
 <?php
 
 function get_archive_header($arg) {
-if($arg == 'league_vip' || $arg == 'league_free'){
+if($arg == 'league_vip' || $arg == 'league_free') {
 	  
 	  $header = array(
     'date'            => array('data' => t('Date'), 'field' => 'u.date'),
     'time'            => array('data' => t('Time'), 'field' => 'u.time'),
-    'flags'           => array('data' => t('Flags'), 'field' => 'u.flags'),
+    'flags'           => array('data' => t('Flags'), 'field' => 'u.iso'),
     'country'         => array('data' => t('Country'), 'field' => 'u.country'),
     'competition'     => array('data' => t('Competition'), 'field' => 'u.competition'),
     'home_team'       => array('data' => t('Home Team'), 'field' => 'u.home_team'),
@@ -29,7 +29,7 @@ if($arg == 'league_vip' || $arg == 'league_free'){
 	 $header = array(
     'date'            => array('data' => t('Date'), 'field' => 'u.date'),
     'time'            => array('data' => t('Time'), 'field' => 'u.time'),
-    'flags'           => array('data' => t('Flags'), 'field' => 'u.flags'),
+    'flags'           => array('data' => t('Flags'), 'field' => 'u.iso'),
     'country'         => array('data' => t('Country'), 'field' => 'u.country'),
     'competition'     => array('data' => t('Competition'), 'field' => 'u.competition'),
     'home_team'       => array('data' => t('Home Team'), 'field' => 'u.home_team'),
