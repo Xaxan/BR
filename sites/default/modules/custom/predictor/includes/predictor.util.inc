@@ -589,7 +589,7 @@ function get_3d_bgcolor($color) {
     		$color = '#0D6B05';
     }
 
-    $bgcolor = 'background:linear-gradient('.$color.', rgb(0, 0, 0)) '.$color.'}';
+    $bgcolor = 'background: -moz-linear-gradient('.$color.', rgb(0, 0, 0)); background:linear-gradient('.$color.', rgb(0, 0, 0)) '.$color.'}';
 	
 	return $bgcolor;
 }

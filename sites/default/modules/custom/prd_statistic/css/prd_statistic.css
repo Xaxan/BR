@@ -6,10 +6,10 @@ tr.expandable{
 	font-size: 12px;
 	text-align: center!important;
 	cursor: pointer;
-	background: -webkit-linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
-	background: -o-linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
-	background: -moz-linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
-	background: linear-gradient(rgb(48, 56, 92) , rgb(1, 0, 6));
+	background: -webkit-linear-gradient(rgb(8, 48, 75) , rgb(1, 0, 6));
+	background: -o-linear-gradient(rgb(8, 48, 75) , rgb(1, 0, 6));
+	background: -moz-linear-gradient(rgb(8, 48, 75) , rgb(1, 0, 6));
+	background: linear-gradient(rgb(8, 48, 75) , rgb(1, 0, 6));
 }
 
 tr.total{

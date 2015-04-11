@@ -66,15 +66,17 @@ switch ($arg){
   break;
  	case 'yc_vip':
  						db_query("set time_zone = '+01:00'");
+ 		$or = db_or()->condition('yc_vip', 'VIPV')->condition('vip', 'VIPV');
 		$query = db_select('predictor_corners_archive', 'u')
-			->condition('vip', 'VIPV','=')
+			->condition($or)
 			->condition('date', strtotime($from), '>=')
 			->condition('date', strtotime($to), '<=')
 			->extend('TableSort');
 	break;
 	case 'yc_free':
-		$query = db_select('predictor_corners_archive', 'u')
+	$query = db_select('predictor_corners_archive', 'u')
 			->condition('vip', 'VIPV','!=')
+			->condition('yc_vip', 'VIPV','!=')
 			->condition('date', strtotime($from), '>=')
 			->condition('date', strtotime($to), '<=')
 			->extend('TableSort');
@@ -138,7 +140,7 @@ foreach ($result as $scores) {
     'corners_ou'      => corners_ou($scores->corners_ou, $scores->vip, $scores->corner, 'archive', $scores->prr_cor, $arg),
     'yellow_cards'    => data_render_rules($scores->yellow_cards, $scores->vip),
     'corner'          => data_render_rules($scores->corner, $scores->vip),
-    'vip'             => vip_data_render_rules($scores->vip, $scores->vip),
+    'vip'             => $scores->prr_yc == 'High' ? vip_data_render_rules('VIPV', 'VIPV') : vip_data_render_rules($scores->vip, $scores->vip),
  );
 }
 
