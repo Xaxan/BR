@@ -198,7 +198,7 @@ function vip_data_render_rules($data, $vip) {
 global $user;
 	$result = $data;
 	if ($vip == 'VIPU' && !user_has_role('memberCC','member1X2')) {
-		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
+		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;text-align: center;'.get_3d_bgcolor(0)));
 	}elseif($data == 'VIPV' && $vip == 'VIPV'){
 		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align:center;'));
 	}elseif($vip == 'VIPU' && user_has_role('memberCC','member1X2')){
@@ -228,7 +228,7 @@ function vip_data_render_rules_yellow_cards($data, $vip) {
 global $user;
 	$result = $data;
 	if ($vip == 'VIPU' && !user_has_role('memberY','member1X2')) {
-		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
+		$result = array('data' =>'VIP','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;text-align: center;'.get_3d_bgcolor(0)));
 	}elseif($data == 'VIPV' && $vip == 'VIPV'){
 		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align: center;'));
   }elseif($vip == 'VIPU' && user_has_role('memberY','member1X2')){
