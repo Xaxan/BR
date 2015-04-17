@@ -101,20 +101,21 @@
     <?php endif; ?>
 
 
-<!-- BEGIN JIVOSITE CODE {literal} -->
-<!--
-<script type='text/javascript'>
-(function(){ var widget_id = 'Cml74oP8Zf';
-var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
--->
-<!-- {/literal} END JIVOSITE CODE -->  </div></div> <!-- /#page, /#page-wrapper -->
+
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55119d9126f25dac" async="async"></script>
 
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+(function(){ var widget_id = 'Cml74oP8Zf';
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+<!-- {/literal} END JIVOSITE CODE -->  </div></div> <!-- /#page, /#page-wrapper -->
 
 <!-- BEGIN JIVOSITE CODE {literal} -->
+<!--
 <script type='text/javascript'>
 (function(){ var widget_id = '1KZFDqM8Yx';
 var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+-->
 <!-- {/literal} END JIVOSITE CODE -->
