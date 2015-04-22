@@ -223,3 +223,181 @@ tr.even:hover, tr.odd:hover{
 #block-views-news-block-1 .item-list ul li{
 	margin: 0px;
 }
+
+
+/* ======================== */
+
+
+.CSSTableGenerator {
+	margin:0px;padding:0px!important;
+	width:100%!important;
+	border:none!important;
+	
+	-moz-border-radius-bottomleft:0px!important;
+	-webkit-border-bottom-left-radius:0px!important;
+	border-bottom-left-radius:0px!important;
+	
+	-moz-border-radius-bottomright:0px!important;
+	-webkit-border-bottom-right-radius:0px!important;
+	border-bottom-right-radius:0px!important;
+	
+	-moz-border-radius-topright:0px!important;
+	-webkit-border-top-right-radius:0px!important;
+	border-top-right-radius:0px!important;
+	
+	-moz-border-radius-topleft:0px!important;
+	-webkit-border-top-left-radius:0px!important;
+	border-top-left-radius:0px!important;
+}.CSSTableGenerator table{
+  border-collapse: collapse!important;
+  border-spacing: 0!important;
+	width:60%!important;
+	height:100%!important;
+	margin:0px 17%!important;
+	padding:0px!important;
+}.CSSTableGenerator tr:last-child td:last-child {
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:first-child {
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}
+.CSSTableGenerator table tr:first-child td:last-child {
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+}.CSSTableGenerator tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+}.CSSTableGenerator tr:hover td{
+	
+}
+.CSSTableGenerator tr:nth-child(odd){ background-color:#ffffff; }
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+	vertical-align:middle;
+	border:1px solid #e5dcdc;
+	border-width:0px 1px 1px 0px;
+	text-align:center;
+	padding:2px;
+	font-size:15px;
+	/* font-family:Arial; */
+	font-weight:normal;
+	color:#000000;
+}.CSSTableGenerator tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.CSSTableGenerator tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.CSSTableGenerator tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.CSSTableGenerator tr:first-child td{
+		background:-o-linear-gradient(bottom, rgb(8, 48, 75) 5%, #000000 100%);	
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, rgb(8, 48, 75)), color-stop(1, #000000) );
+	background:-moz-linear-gradient( center top, rgb(8, 48, 75) 5%, #000000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=rgb(8, 48, 75), endColorstr="#000000");	
+	background: -o-linear-gradient(top,rgb(8, 48, 75),000000);
+
+	background-color:#b50e0e;
+	border:0px solid #e5dcdc;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:17px;
+	/* font-family:Arial; */
+	font-weight:bold;
+	color:#ffffff;
+}
+/*
+.CSSTableGenerator tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #b50e0e 5%, #000000 100%);	
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b50e0e), color-stop(1, #000000) );
+	background:-moz-linear-gradient( center top, #b50e0e 5%, #000000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#b50e0e", endColorstr="#000000");	
+	background: -o-linear-gradient(top,#b50e0e,000000);
+	background-color:#b50e0e;
+}
+*/
+.CSSTableGenerator tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.CSSTableGenerator tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}
+
+.money{
+	color: rgb(255, 97, 0);
+  margin-top: 9px;
+  font-size:20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.plan{
+	font-weight: bold;
+  padding-top: 9px;
+  /* font-family: initial; */
+}
+
+
+.paypal{
+	background: url("http://dev.betandrelax.com/pricing/ps.gif") no-repeat;
+	padding-bottom: 83px;
+	margin-left: 74px;
+	float: left;
+  padding: 117px;
+  margin-top: -6px;
+}
+
+.sign-btn{
+  -webkit-border-radius: 4!important;
+  -moz-border-radius: 4!important;
+  border-radius: 4px!important;
+  font-family: Arial!important;
+  color: #ffffff!important;
+  font-size: 17px!important;
+	background:-o-linear-gradient(bottom, #840909 5%, #000000 100%)!important;	
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #840909), color-stop(1, #000000) )!important;
+	background:-moz-linear-gradient( center top, #840909 5%, #000000 100% )!important;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#840909", endColorstr="#000000")!important;	
+	background: -o-linear-gradient(top,#840909,000000)!important;
+	background-color:#b50e0e!important;
+  padding: 5px 12px 6px 11px!important;
+  text-decoration: none!important;
+  font-weight: bold!important;
+ }
+.sign-btn:hover{
+  -webkit-border-radius: 4!important;
+  -moz-border-radius: 4!important;
+  border-radius: 4px!important;
+  font-family: Arial!important;
+  color: #ffffff!important;
+  font-size: 17px!important;
+	background:-o-linear-gradient(bottom, #FF0F0F 5%, #000000 100%)!important;	
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #FF0F0F), color-stop(1, #000000) )!important;
+	background:-moz-linear-gradient( center top, #FF0F0F 5%, #000000 100% )!important;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#FF0F0F", endColorstr="#000000")!important;	
+	background: -o-linear-gradient(top,#FF0F0F,000000)!important;
+	background-color:#000000!important;
+  padding: 5px 12px 6px 11px!important;
+  text-decoration: none!important;
+  font-weight: bold!important;
+}
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+     
+.foter-text{
+	float: left;
+}     
+
+#payment-method{
+	margin-top: 62px;
+}	
