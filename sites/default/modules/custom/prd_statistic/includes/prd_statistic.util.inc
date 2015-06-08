@@ -12,7 +12,9 @@ foreach($year as $key => $value) {
 		$year_array[$key]['cor_total']   = get_corr_total_by_year($value['year']);
 		$year_array[$key]['cor_won']     = get_total_corners_won($value['year']);
 		$year_array[$key]['cor_percent'] = ceil(get_total_corners_won($value['year']) / get_corr_total_by_year($value['year']) * 100);
-		$year_array[$key]['month']       = toArray(get_yc_month($value['year']));
+		$get_yc_month  									 = toArray(get_yc_month($value['year']));
+		$get_cor_month 									 = toArray(get_cor_month($value['year']));
+		$year_array[$key]['month']       = month_merging($get_yc_month, $get_cor_month);
 	}
 	unset($year_array[$key]['total']);
 }
@@ -29,6 +31,8 @@ foreach ($year_array as $key=>$value) {
 			unset($year_array[$key]['month'][$k]['total']);
 		}
 }
+
+
 
 $html = '<tr>';
  foreach ($year_array as $key=>$value) {
@@ -232,8 +236,20 @@ return $data;
 function get_yc_month($year) {
 	db_query("set time_zone = '+01:00'");
 	$sql  = db_query("SELECT DATE_FORMAT(FROM_UNIXTIME(date), '%M') AS month, 
-										COUNT(*) AS total FROM predictor_corners_archive
+										COUNT(*) AS yc_total FROM predictor_corners_archive
 										WHERE prr_yc ='High'
+										AND DATE_FORMAT(FROM_UNIXTIME(date), '%Y') = $year
+										GROUP BY DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m')
+										ORDER BY DATE_FORMAT(FROM_UNIXTIME(date), '%m') DESC")->fetchAll();
+
+return $sql;
+}
+
+function get_cor_month($year) {
+	db_query("set time_zone = '+01:00'");
+	$sql  = db_query("SELECT DATE_FORMAT(FROM_UNIXTIME(date), '%M') AS month, 
+										COUNT(*) AS cor_total FROM predictor_corners_archive
+										WHERE prr_cor ='High'
 										AND DATE_FORMAT(FROM_UNIXTIME(date), '%Y') = $year
 										GROUP BY DATE_FORMAT(FROM_UNIXTIME(date), '%Y-%m')
 										ORDER BY DATE_FORMAT(FROM_UNIXTIME(date), '%m') DESC")->fetchAll();
@@ -284,4 +300,32 @@ function generate_from_to_date($month, $year, $type) {
 	}
 	
 	return $result;	
+}
+
+function month_merging($yc_month, $cor_month) {
+	$yc_month_names = array();
+	$cor_month_names = array();
+	$result = array();
+	
+	foreach ($yc_month as $key => $value ){
+		  $yc_month_names[$value['month']] = $value['month'];
+	}
+	
+  foreach ($cor_month as $key => $value ){
+			$cor_month_names[$value['month']] = $value['month'];
+	}	
+	
+	$merged_months = array_merge($cor_month_names,$yc_month_names);
+	
+	  foreach ($merged_months as $key => $value ) {
+	    $month = $value;
+	    $total = 0;
+	    foreach ($yc_month as $k => $v ){
+		   if ($v['month'] == $month) {
+			   $total = $v['yc_total'];
+		    }
+	   }
+	  $result[] = array('month' => $value,'total'=> $total);  
+	}
+	return $result;
 }
