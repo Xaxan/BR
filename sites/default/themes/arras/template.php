@@ -2193,3 +2193,11 @@ function arras_user_menu_title() {
 	global $user;
  return user_is_logged_in() ? t($user->name) : t('User account');
 }
+
+function arras_menu_link(&$variables) {
+	
+	if(strpos($variables['element']['#title'] , 'Pigs') !== false ) {
+	   $variables['element']['#attributes']['class'][] = 'new-prd';
+	}
+	return theme_menu_link($variables);
+}

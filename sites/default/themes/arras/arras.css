@@ -182,3 +182,6 @@ ul.menu li { padding-top: 0; }
    display: none!important;
 }
 
+.new-prd a{
+	color: rgb(255, 75, 75)!important;
+}
