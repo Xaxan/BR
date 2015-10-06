@@ -1,0 +1,190 @@
+<?php
+/**
+ * Implements hook_menu().
+ */
+function file_uploader_menu() {
+  $items = array();
+
+  $items['admin/file_uploader'] = array(
+    'title' => 'Picks File Uploader',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('file_uploader_upload_form'),
+    'access arguments' => array('upload private files'),
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => -14,
+  );
+  
+   $items['soft/%'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('soft_form'),
+    'access arguments' => array('download all private files'),
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+function file_uploader_block_info() {    
+  $blocks['picks_finder'] = array(
+    'info' => t('Software Download'),
+  );
+
+  return $blocks;
+}
+
+
+function soft_form($form, &$form_state){
+	Global $base_url;
+
+	$filename = $form_state['build_info']['args'][0];
+	$filepath = 'public://';
+		
+	//counter code
+  $fp = fopen("public://counter.txt", "r");
+  $count = fread($fp, 1024);
+  fclose($fp);
+  $count = $count + 1;
+
+  $fp = fopen("public://counter.txt", "w");
+  fwrite($fp, $count);
+  fclose($fp);
+  
+  variable_set('picks_uploader_dowload_count', $count);
+	
+	// http headers for zip downloads
+	header("Pragma: public");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("Cache-Control: public");
+	header("Content-Description: File Transfer");
+	header("Content-type: application/octet-stream");
+	header("Content-Disposition: attachment; filename=\"".$filename."\"");
+	header("Content-Transfer-Encoding: binary");
+	header("Content-Length: ".filesize('public://'.$filename));  
+	readfile($filepath.$filename);
+	exit();
+	
+}
+
+function file_uploader_block_view($delta = '') {
+	
+	$file_name = variable_get('picks_uploader',0);
+	$file = file_uploader_file_download('public://'.$file_name);
+	Global $base_url;
+	
+  // The $delta parameter tells us which block is being requested.
+  switch ($delta) {
+    case 'picks_finder':
+      // Create your block content here
+  $block['subject'] = t('Software Download');
+  $block['content'] = '<a onClick=window.location.assign("'.$base_url.'/soft/'.$file->filename.'") href=#>
+  											<b style="font-size:16px;text-align:center;">'.strtoupper(variable_get('picks_uploader_title','PicksFinder')).'</b>
+  										</a>
+  										 <span>
+  										  <p style="margin: 0px;color: #2C445E;font-weight: bold;margin-top: 8px;font-size: 10px;">'.strtoupper(variable_get('picks_uploader_desc','')).'</p>
+  										  <p style="margin: 0px;margin-top: 5px;color: black;font-weight: bold;">Downloaded '.variable_get('picks_uploader_dowload_count', '').' Times</p>
+  										  Updated:<b style="color: #C51313;margin: 0px;font-weight: bold;font-size: 10px;">'.date('m.d.Y h:i:s A',strtotime('+3 hour', $file->timestamp) ).'</b>
+  										 </span>';
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function file_uploader_permission() {
+  return array(
+    'upload private files' => array(
+      'title' => t('Upload private files'),
+    ),
+    'download own private files' => array(
+      'title' => t('Download own private files'),
+    ),
+    'download all private files' => array(
+      'title' => t('Download all private files'),
+    ),
+  );
+}
+
+/**
+ * Private file upload form.
+ */
+function file_uploader_upload_form($form, &$form_state) {
+  $form = array();
+
+  $form['private_file'] = array(
+    '#type' => 'file',
+    '#title' => t('Choose a file'),
+  );
+  
+   $form['private_file_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Choose a file title for display'),
+    '#default_value' => variable_get('picks_uploader_title',''),
+  );
+  
+  $form['private_file_desc'] = array(
+    '#type' => 'textfield',
+    '#title' => t('File Description'),
+    '#default_value' => variable_get('picks_uploader_desc',''),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Upload as private file'),
+  );
+ 
+  $form['#attached']['js'] = array(
+	 drupal_get_path('module', 'file_uploader') . '/uploader.js',
+	);
+
+  return $form;
+}
+
+/**
+ * Submit handler for private file upload form.
+ */
+function file_uploader_upload_form_submit($form, &$form_state) {
+	
+	$file_title = $form_state['values']['private_file_name'];
+	$file_esc   = $form_state['values']['private_file_desc'];
+  $file       = file_save_upload('private_file', array('file_validate_extensions' => array('rar pdf')), 'public://', FILE_EXISTS_REPLACE);
+ 
+  if ($file) {
+    drupal_set_message(t('Thank you for uploading private file. You can download it from @url',
+            array('@url' => file_create_url($file->uri))));
+  }
+
+   variable_set('picks_uploader',$file->filename);
+   variable_set('picks_uploader_title', $file_title);
+   variable_set('picks_uploader_desc', $file_esc);
+}
+
+/**
+ * Implements hook_file_download().
+ */
+function file_uploader_file_download($uri) {
+  // Get the file record based on the URI. If not in the database just return.
+  $files = file_load_multiple(array(), array('uri' => $uri));
+  
+
+  if (count($files)) {
+    foreach ($files as $item) {
+      // Since some database servers sometimes use a case-insensitive comparison
+      // by default, double check that the filename is an exact match.
+      if ($item->uri === $uri) {
+        $file = $item;
+        break;
+      }
+    }
+  }
+  
+    if (!isset($file)) {
+    return;
+  }
+   //$headers = file_get_content_headers($file);
+  return $file;
+ }
