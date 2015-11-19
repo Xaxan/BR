@@ -1,6 +1,0 @@
-name = Files Uploader
-description = Upload Files
-
-core = 7.x
-version = "7.x"
-package = KSG
