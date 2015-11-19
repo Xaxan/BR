@@ -25,8 +25,8 @@ font-weight: bold;
     <?php print $submit; // Display submit button ?>
     <?php print $rendered; // Display hidden elements (required for successful login) ?> 
   </div>
-  <div style="color:rgb(104, 0, 0);font-weight: bold;text-align: center;">
-  <span>Register for free and receive 2 Cards&Corners picks every week absolutely free!</span>
+  <div style="color:rgb(104, 0, 0);font-weight: bold;text-align: center;font-size: 10px;">
+  <span>Subscribe for week Membership and receive full access to Member's Exclulsive Picks and Card&Corner (NonVIP) Picks!</span>
   </div>
    <div style="text-align: center;margin-top: 8px;">
       <a href="/aMember/signup" class="btn" target="_blank">Create new account</a>

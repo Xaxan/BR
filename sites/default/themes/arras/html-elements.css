@@ -59,7 +59,7 @@ a:hover, a:focus { color: #cc0000; }
 a:active {}
 
 img { border: 0; }
-fieldset { border: 1px solid #ccc; padding: 9px; }
+fieldset {padding: 5px; }
 
 blockquote        { border-left: 2px solid #CCC; color: #666; padding: 5px 10px 1px; margin: 10px; font-style: normal; }
 code          { background: #EAEAEA; color: #333; font-family: Consolas, Monaco, Courier, monospace; font-size: 11px; margin: 1px 0; padding: 1px 3px; }
@@ -74,7 +74,7 @@ table, th, td     { border: 1px solid #CCC; }
 th, thead th      { font-weight: 700; color: #333; background: #DDD; }
 /* td, tbody td      { background: #F0F0F0; } */
 table  { border-collapse: collapse; border-spacing: 0; font-size: 11px; font-weight: bolder;}
-th, td  { padding: 3px; }
+th, td  { padding: 2px; }
 
 dl  { margin: 10px 0; font-size: 14px; }
 dl dt  { color: #666; padding-bottom: 3px; }
