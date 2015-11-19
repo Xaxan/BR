@@ -103,7 +103,7 @@ function get_table() {
     </tr>
 		'.get_year_table().'
 </table>
-<div style="font-weight:bold;padding:5px;"><span style="color:rgb(203, 87, 87)";>Note*</span>: Yellow Cards picks avg. odds - 1.85 / Corners picks avg. odds - 1.55.</div>
+<div style="font-weight:bold;padding:5px;"><span style="color:rgb(203, 87, 87)";>Note*</span>: Yellow Cards picks avg. odds - 1.85 / Corners picks avg. odds - 1.75</div>
 <div style="font-weight: bold;padding-left: 5px;font-size: 17px;text-align: center;border-bottom: 1px dashed silver;border-top:1px dashed silver;">
 		<span style="color:#8E0000";>This is no longer betting! This is a consistent business with yield up to 20%</span>
 		<p style="color:#8E0000;margin:0px;">Play with us - Bet and Relax</p>
