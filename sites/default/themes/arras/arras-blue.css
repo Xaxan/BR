@@ -139,14 +139,16 @@ a:hover { color: #BF511F; }
    display: none!important;
 }
 
+/*
 #block-block-25 .block-title{
     color: red;
-    -webkit-animation-name: example; /* Chrome, Safari, Opera */
-    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    -webkit-animation-name: example; 
+    -webkit-animation-duration: 2s; 
     animation-name: example;
     animation-duration: 2s;
      animation-iteration-count: 50;
 }
+*/
 
 @-webkit-keyframes example {
     from {color: red;}

@@ -2199,5 +2199,26 @@ function arras_menu_link(&$variables) {
 	if(strpos($variables['element']['#title'] , 'Pigs') !== false ) {
 	   $variables['element']['#attributes']['class'][] = 'new-prd';
 	}
-	return theme_menu_link($variables);
+	
+	$element = $variables['element'];
+  $menu_link = '';
+  
+  if (!empty($element['#below'])) {
+    $menu_link = drupal_render($element['#below']);
+  }
+
+  $element['#localized_options']['html'] = TRUE;
+
+  
+  if (!empty($element['#below'])) {
+   $linktext = $element['#title'].'<span class="sf-sub-indicator"> .</span>';
+  }else{
+	 $linktext = $element['#title']; 
+  }
+  
+    $output = l($linktext, $element['#href'], $element['#localized_options']);
+  
+  return '<li' . drupal_attributes($element['#attributes']) . '>' . $output . $menu_link . "</li>\n";
+	
+	//return theme_menu_link($variables);
 }

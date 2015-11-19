@@ -44,7 +44,7 @@ body { background: #f0f0f0; }
 #navigation .section { width: 1287px; margin: 0 auto; }
 
 #navigation .sf-menu  { line-height: 1.1; float: left; }
-#navigation .sf-menu a  { display: block; text-decoration: none; padding: 8px 12px 11px; color: #AAA; font-size: 14px; }
+#navigation .sf-menu a  { display: block; text-decoration: none; padding: 8px 11px 11px; color: #AAA; font-size: 14px; }
 #navigation .sf-menu ul li  { border: 1px solid #474331; margin-top: -1px; }
 #navigation .sf-menu a:hover, #navigation .sf-menu li:hover, #navigation .sf-menu li.iehover, #navigation .sf-menu ul li  { background: #373331; color: #FFF; }
 #navigation .sf-menu ul a:hover, #navigation .sf-menu ul li.iehover, #navigation .sf-menu ul li:hover { color: #373331; background: #FFF; }
@@ -184,4 +184,16 @@ ul.menu li { padding-top: 0; }
 
 .new-prd a{
 	color: #FFFF00!important;
+}
+
+a > .sf-sub-indicator {
+    background-position:-10px -96px
+  }
+
+.sf-sub-indicator {
+	  background: url('images/arrows-ffffff.png') no-repeat -10px -100px;
+    text-indent: -999em;
+    padding: 0px 3px 0px 4px;
+    margin-left: 3px;
+    display:inline-block;
 }
