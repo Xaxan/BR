@@ -203,7 +203,7 @@ if(isset($_GET['sort']) && isset($_GET['order'])){
   
   if ($is_full != 1) {
 		$result = $query->fields('u', array('date','time','iso','country','competition', 'home_team', 'away_team','prr_yc','prr_cor','yellow_cards_ou', 'corners_ou',   'yellow_cards', 'corner', 'vip'))
-		->condition('prr_cor', 'High','=')
+//	->condition('prr_cor', 'High','=')
 		->orderBy($order, $sort)
 		->execute();
   }else{
@@ -211,6 +211,9 @@ if(isset($_GET['sort']) && isset($_GET['order'])){
 		->orderBy($order, $sort)
 		->execute();
 	}
+
+
+
 
 $rows = array();
 foreach ($result as $scores) {

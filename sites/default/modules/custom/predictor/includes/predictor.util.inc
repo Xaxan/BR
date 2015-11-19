@@ -154,6 +154,8 @@ function data_render_rules_yellow_cards_ou($data, $vip, $yellow_cards, $type = N
 		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif ($vip != 'VIP' && $yellow_cards !='na') {
  		$result = get_yellow_cards_ou_color($data, $yellow_cards, $type, $prr, $arg);
+ 	}elseif ($vip == '' && !user_has_role('member')){
+	 	$result = array('data' =>'','style' => array('color:white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));	
  	}else{
 	 	$result = array('data' => $data,'style' => array('text-align: center;'));
  	}
@@ -169,6 +171,8 @@ function corners_ou($data, $vip, $corners, $archive = NULL, $pro = NULL, $arg = 
 		$result = array('data' =>'','style' => array('color:white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
 	}elseif ($vip != 'VIP' && $corners !='na') {
  		$result = get_corners_ou_color($data, $corners, $archive, $pro, $arg);
+ 	}elseif ($vip == '' && !user_has_role('member')){
+	 	$result = array('data' =>'','style' => array('color:white;background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
  	}else{
 	 	$result = array('data' => $data,'style' => array('text-align: center;'));
  	}
@@ -182,11 +186,9 @@ global $user;
 	$result = $data;
 	if ($vip == 'VIPU' && !user_has_role('memberCC','member1X2')) {
 		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
-	}/*
-elseif($vip == 'VIPV'){
-		$result = array('data' =>$data,'style' => array('background-color:white;border-right-color:white;'));
-	}
-*/else{
+	}elseif($vip == '' && !user_has_role('member')){
+		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
+	}else{
 	 	$result = array('data' => $data,'style' => array('text-align: center;'));
  	}
 
@@ -203,6 +205,10 @@ global $user;
 		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align:center;'));
 	}elseif($vip == 'VIPU' && user_has_role('memberCC','member1X2')){
 		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align:center;'));
+	}elseif($vip == '' && !user_has_role('member')) {
+		$result = array('data' =>'MEM','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;text-align: center;'.get_3d_bgcolor(1)));
+	}elseif($vip == '' && user_has_role('member')) {
+		$result = array('data' =>'MEM','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align:center;'));
 	}
 
 	return $result;
@@ -214,11 +220,11 @@ global $user;
 	$result = $data;
 	if ($vip == 'VIPU' && !user_has_role('memberY','member1X2')) {
 		$result = array('data' =>'','style' => array('background-color:#0a4805;border-right-color:#0a4805;'.get_3d_bgcolor(0)));
-	}/*
-elseif($vip == 'VIPV'){
-		$result = array('data' =>$data,'style' => array('background-color:white;border-right-color:white;'));
+	}elseif($vip == '' && !user_has_role('member')) {
+		$result = array('data' =>'','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;text-align: center;'.get_3d_bgcolor(0)));
+	}elseif($vip == '' && user_has_role('member')) {
+		$result = array('data' =>$data,'style' => array('text-align: center;'));
 	}
-*/
 
 	return $result;
 }
@@ -233,6 +239,10 @@ global $user;
 		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align: center;'));
   }elseif($vip == 'VIPU' && user_has_role('memberY','member1X2')){
 		$result = array('data' =>'VIP','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align: center;'));
+	}elseif($vip == '' && !user_has_role('member')) {
+		$result = array('data' =>'MEM','style' => array('color: white;background-color:#0a4805;border-right-color:#0a4805;text-align: center;'.get_3d_bgcolor(1)));
+	}elseif($vip == '' && user_has_role('member')) {
+		$result = array('data' =>'MEM','style' => array('background-color:#0a4805;border-right-color:#0a4805;color: white;text-align:center;'));
 	}
 
 	return $result;
@@ -587,6 +597,9 @@ function get_3d_bgcolor($color) {
 
    if ($color == 0){
     		$color = '#0D6B05';
+    }
+    if ($color == 1) {
+	    $color = '#1CA80F';
     }
 
     $bgcolor = 'background: -moz-linear-gradient('.$color.', rgb(0, 0, 0)); background:linear-gradient('.$color.', rgb(0, 0, 0))';

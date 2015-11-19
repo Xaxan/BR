@@ -232,7 +232,7 @@ if(isset($_GET['sort']) && isset($_GET['order'])){
 	
 	if ($is_full != 1) {
 		$result = $query->fields('u', array('date','time','iso','country','competition', 'home_team', 'away_team','prr_yc','yellow_cards_ou', 'yellow_cards', 'yc_vip', 'vip'))
-	->condition('prr_yc', 'High','=')
+	//->condition('prr_yc', 'High','=')
 	->orderBy($order, $sort)
 	->execute();	
 	}else{
